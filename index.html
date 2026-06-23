@@ -383,13 +383,13 @@ typedJSFn.run(subtitleType)</script></div><script>window.addEventListener('load'
             'date': item.updated_at,
             'githubUrl': item.html_url
           }
-        })
-        findTrueUrl(githubArray)
+        })        findTrueUrl(githubArray)
       }).catch(e => {
         const $dom = document.querySelector('#card-newest-comments .aside-list')
-        $dom.textContent= "暂无评论"
+        if ($dom && !$dom.querySelector('.aside-list-item')) {
+          $dom.textContent = '暂无评论'
+        }
       })
-  }
 
   const generateHtml = array => {
     let result = ''
@@ -423,9 +423,8 @@ typedJSFn.run(subtitleType)</script></div><script>window.addEventListener('load'
       const data = saveToLocal.get('github-newest-comments-v2')
       if (data) {
         generateHtml(JSON.parse(data))
-      } else {
-        getComment()
       }
+      getComment()
     }
   }
 
