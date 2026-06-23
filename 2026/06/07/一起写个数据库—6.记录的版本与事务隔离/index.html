@@ -414,14 +414,16 @@ XMAX is in SP(Ti)               // 这个事务在Ti开始前还未提交
     }
     if (window.__gitalkCommentCount !== n) {
       window.__gitalkCommentRefreshUntil = Date.now() + 10000
-      if (typeof window.refreshNewestComments === "function") {
-        setTimeout(() => {
+      setTimeout(() => {
+        if (typeof window.refreshNewestComments === "function") {
           window.refreshNewestComments()
-        }, 1500)
-        setTimeout(() => {
+        }
+      }, 1500)
+      setTimeout(() => {
+        if (typeof window.refreshNewestComments === "function") {
           window.refreshNewestComments()
-        }, 7000)
-      }
+        }
+      }, 7000)
     }
     window.__gitalkCommentCount = n
   }

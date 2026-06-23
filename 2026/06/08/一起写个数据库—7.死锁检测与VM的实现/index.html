@@ -511,14 +511,16 @@ public boolean delete(long xid, long uid) throws Exception {
     }
     if (window.__gitalkCommentCount !== n) {
       window.__gitalkCommentRefreshUntil = Date.now() + 10000
-      if (typeof window.refreshNewestComments === "function") {
-        setTimeout(() => {
+      setTimeout(() => {
+        if (typeof window.refreshNewestComments === "function") {
           window.refreshNewestComments()
-        }, 1500)
-        setTimeout(() => {
+        }
+      }, 1500)
+      setTimeout(() => {
+        if (typeof window.refreshNewestComments === "function") {
           window.refreshNewestComments()
-        }, 7000)
-      }
+        }
+      }, 7000)
     }
     window.__gitalkCommentCount = n
   }
