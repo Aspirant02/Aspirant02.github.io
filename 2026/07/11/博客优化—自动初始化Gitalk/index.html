@@ -292,8 +292,15 @@ document.addEventListener('pjax:send', () => {
   const commentCount = n => {
     const isCommentCount = document.querySelector('#post-meta .gitalk-comment-count')
     if (isCommentCount) {
-      isCommentCount.textContent= n
+      isCommentCount.textContent = n
     }
+    if (window.__gitalkCommentCount !== undefined && window.__gitalkCommentCount !== n) {
+      localStorage.removeItem('github-newest-comments-v2')
+      if (typeof window.refreshNewestComments === 'function') {
+        window.refreshNewestComments()
+      }
+    }
+    window.__gitalkCommentCount = n
   }
 
   if ('Gitalk' === 'Gitalk' || !true) {

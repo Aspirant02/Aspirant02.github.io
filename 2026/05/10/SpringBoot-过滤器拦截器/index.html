@@ -588,8 +588,15 @@ afterCompletion方法：视图渲染完毕后执行，最后执行
   const commentCount = n => {
     const isCommentCount = document.querySelector('#post-meta .gitalk-comment-count')
     if (isCommentCount) {
-      isCommentCount.textContent= n
+      isCommentCount.textContent = n
     }
+    if (window.__gitalkCommentCount !== undefined && window.__gitalkCommentCount !== n) {
+      localStorage.removeItem('github-newest-comments-v2')
+      if (typeof window.refreshNewestComments === 'function') {
+        window.refreshNewestComments()
+      }
+    }
+    window.__gitalkCommentCount = n
   }
 
   if ('Gitalk' === 'Gitalk' || !true) {

@@ -410,8 +410,15 @@ XMAX is in SP(Ti)               // 这个事务在Ti开始前还未提交
   const commentCount = n => {
     const isCommentCount = document.querySelector('#post-meta .gitalk-comment-count')
     if (isCommentCount) {
-      isCommentCount.textContent= n
+      isCommentCount.textContent = n
     }
+    if (window.__gitalkCommentCount !== undefined && window.__gitalkCommentCount !== n) {
+      localStorage.removeItem('github-newest-comments-v2')
+      if (typeof window.refreshNewestComments === 'function') {
+        window.refreshNewestComments()
+      }
+    }
+    window.__gitalkCommentCount = n
   }
 
   if ('Gitalk' === 'Gitalk' || !true) {
