@@ -189,29 +189,42 @@ document.addEventListener('pjax:send', () => {
   }
 
   const findTrueUrl = (array) => {
+    if (!Array.isArray(array) || array.length === 0) {
+      return
+    }
+
     Promise.all(array.map(item =>
-      fetch(item.url).then(resp => resp.json()).then(data => {
-        let urlArray = data.body ? data.body.match(/(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?/ig) : []
-        if (!Array.isArray(urlArray) || urlArray.length === 0) {
-          urlArray = [`${data.html_url}`]
-        }
-        if (data.user.login === 'utterances-bot') {
-          return urlArray.pop()
-        } else {
-          return urlArray.shift()
-        }
-      })
+      fetch(item.url)
+        .then(resp => {
+          if (!resp.ok) {
+            throw new Error(resp.statusText || 'request failed')
+          }
+          return resp.json()
+        })
+        .then(data => {
+          let urlArray = data.body ? data.body.match(/(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?/ig) : []
+          if (!Array.isArray(urlArray) || urlArray.length === 0) {
+            urlArray = [`${data.html_url || item.url}`]
+          }
+          const trueUrl = data.user && data.user.login === 'utterances-bot'
+            ? urlArray.pop()
+            : urlArray.shift()
+          return trueUrl || item.url
+        })
+        .catch(() => item.url)
     )).then(res => {
         array = array.map((i,index)=> {
           return {
             ...i,
-            url: res[index]
+            url: res[index] || i.url
           }
         })
 
         saveToLocal.set('github-newest-comments-v2', JSON.stringify(array), 10/(60*24))
         generateHtml(array)
-    });
+    }).catch(() => {
+        generateHtml(array)
+    })
   }
 
   const getComment = () => {
@@ -232,14 +245,34 @@ document.addEventListener('pjax:send', () => {
             'date': item.updated_at,
             'githubUrl': item.html_url
           }
-        })        findTrueUrl(githubArray)
-      }).catch(e => {
+        })
+        if (githubArray.length === 0) {
+          const cached = saveToLocal.get('github-newest-comments-v2')
+          if (cached) {
+            try {
+              generateHtml(JSON.parse(cached))
+            } catch (e) {
+              const $dom = document.querySelector('#card-newest-comments .aside-list')
+              if ($dom && !$dom.querySelector('.aside-list-item')) {
+                $dom.textContent = '????'
+              }
+            }
+          } else {
+            const $dom = document.querySelector('#card-newest-comments .aside-list')
+            if ($dom && !$dom.querySelector('.aside-list-item')) {
+              $dom.textContent = '????'
+            }
+          }
+          return
+        }
+        findTrueUrl(githubArray)
+      }).catch(() => {
         const $dom = document.querySelector('#card-newest-comments .aside-list')
         if ($dom && !$dom.querySelector('.aside-list-item')) {
-          $dom.textContent = '暂无评论'
+          $dom.textContent = '????'
         }
       })
-
+  }
   const generateHtml = array => {
     let result = ''
 

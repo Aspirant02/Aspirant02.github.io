@@ -491,7 +491,6 @@ private static void doInsertLog(PageCache pc, byte[] log, int flag) {
       isCommentCount.textContent = n
     }
     if (window.__gitalkCommentCount !== undefined && window.__gitalkCommentCount !== n) {
-      localStorage.removeItem('github-newest-comments-v2')
       if (typeof window.refreshNewestComments === 'function') {
         window.refreshNewestComments()
       }
