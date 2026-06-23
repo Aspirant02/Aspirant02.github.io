@@ -207,8 +207,14 @@ document.addEventListener('pjax:send', () => {
       isCommentCount.textContent = n
     }
     if (window.__gitalkCommentCount !== undefined && window.__gitalkCommentCount !== n) {
-      if (typeof window.refreshNewestComments === 'function') {
-        window.refreshNewestComments()
+      window.__gitalkCommentRefreshUntil = Date.now() + 10000
+      if (typeof window.refreshNewestComments === "function") {
+        setTimeout(() => {
+          window.refreshNewestComments()
+        }, 1500)
+        setTimeout(() => {
+          window.refreshNewestComments()
+        }, 7000)
       }
     }
     window.__gitalkCommentCount = n
@@ -235,13 +241,64 @@ document.addEventListener('pjax:send', () => {
     return content
   }
 
+  const getGithubHeaders = () => {
+    const headers = {
+      Accept: 'application/vnd.github.v3.html+json'
+    }
+    const accessToken = window.localStorage.getItem('GT_ACCESS_TOKEN')
+    if (accessToken) {
+      headers.Authorization = `token ${accessToken}`
+    }
+    return headers
+  }
+
+  const getLatestGitalkComment = () => {
+    const $comments = document.querySelector('#gitalk-container .gt-comments') || document.querySelector('#gitalk-container')
+    const $comment = $comments && $comments.querySelector('.gt-comment')
+    if (!$comment) return null
+
+    const avatar = $comment.querySelector('.gt-comment-avatar')?.getAttribute('src') || '/img/cyl.jpg'
+    const nick = $comment.querySelector('.gt-comment-username')?.textContent?.trim() || 'Aspirant02'
+    const content = $comment.querySelector('.gt-comment-body')?.innerText?.trim() || $comment.querySelector('.gt-comment-text')?.textContent?.trim() || ''
+    const date = new Date().toISOString()
+    const githubUrl = $comment.querySelector('.gt-comment-username')?.getAttribute('href') || ''
+    return {
+      avatar,
+      content: changeContent(content),
+      nick,
+      url: githubUrl || window.location.href,
+      date,
+      githubUrl
+    }
+  }
+
+  const getLatestGitalkCommentsFromDom = () => {
+    const comments = Array.from(document.querySelectorAll('#gitalk-container .gt-comment'))
+    return comments.map(comment => {
+      const avatar = comment.querySelector('.gt-comment-avatar')?.getAttribute('src') || '/img/cyl.jpg'
+      const nick = comment.querySelector('.gt-comment-username')?.textContent?.trim() || 'Aspirant02'
+      const content = comment.querySelector('.gt-comment-body')?.innerText?.trim() || comment.querySelector('.gt-comment-text')?.textContent?.trim() || ''
+      const githubUrl = comment.querySelector('.gt-comment-username')?.getAttribute('href') || ''
+      return {
+        avatar,
+        content: changeContent(content),
+        nick,
+        url: githubUrl || window.location.href,
+        date: new Date().toISOString(),
+        githubUrl
+      }
+    }).filter(item => item.content)
+  }
+
   const findTrueUrl = (array) => {
     if (!Array.isArray(array) || array.length === 0) {
       return
     }
 
     Promise.all(array.map(item =>
-      fetch(item.url)
+      fetch(item.url, {
+        headers: getGithubHeaders()
+      })
         .then(resp => {
           if (!resp.ok) {
             throw new Error(resp.statusText || 'request failed')
@@ -267,7 +324,7 @@ document.addEventListener('pjax:send', () => {
           }
         })
 
-        saveToLocal.set('github-newest-comments-v2', JSON.stringify(array), 10/(60*24))
+        saveToLocal.set('github-newest-comments-v2', JSON.stringify(array), 7)
         generateHtml(array)
     }).catch(() => {
         generateHtml(array)
@@ -275,10 +332,8 @@ document.addEventListener('pjax:send', () => {
   }
 
   const getComment = () => {
-    fetch('https://api.github.com/repos/Aspirant02/Aspirant02.github.io/issues/comments?sort=updated&direction=desc&per_page=6&page=1',{
-      "headers": {
-        Accept: 'application/vnd.github.v3.html+json'
-      }
+    fetch('https://api.github.com/repos/Aspirant02/Aspirant02.github.io/issues/comments?sort=updated&direction=desc&per_page=6&page=1', {
+      headers: getGithubHeaders()
     })
       .then(response => response.ok ? response.json() : [])
       .then(data => {
@@ -294,6 +349,11 @@ document.addEventListener('pjax:send', () => {
           }
         })
         if (githubArray.length === 0) {
+          const localPreview = getLatestGitalkCommentsFromDom()
+          if (localPreview.length > 0) {
+            generateHtml(localPreview)
+            return
+          }
           const cached = saveToLocal.get('github-newest-comments-v2')
           if (cached) {
             try {
@@ -314,12 +374,18 @@ document.addEventListener('pjax:send', () => {
         }
         findTrueUrl(githubArray)
       }).catch(() => {
+        const localPreview = getLatestGitalkCommentsFromDom()
+        if (localPreview.length > 0) {
+          generateHtml(localPreview)
+          return
+        }
         const $dom = document.querySelector('#card-newest-comments .aside-list')
         if ($dom && !$dom.querySelector('.aside-list-item')) {
           $dom.textContent = '????'
         }
       })
   }
+
   const generateHtml = array => {
     let result = ''
 
@@ -349,6 +415,12 @@ document.addEventListener('pjax:send', () => {
 
   const newestCommentInit = () => {
     if (document.querySelector('#card-newest-comments .aside-list')) {
+      const refreshUntil = window.__gitalkCommentRefreshUntil || 0
+      const liveComments = getLatestGitalkCommentsFromDom()
+      if (Date.now() < refreshUntil && liveComments.length > 0) {
+        generateHtml(liveComments)
+        return
+      }
       const data = saveToLocal.get('github-newest-comments-v2')
       if (data) {
         generateHtml(JSON.parse(data))
