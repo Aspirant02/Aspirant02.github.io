@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>Loong</title>
+  <title>Jeffrey</title>
   
   <subtitle>一个独立开发者的博客</subtitle>
-  <link href="http://ylcheng1789.github.io/atom.xml" rel="self"/>
+  <link href="https://aspirant02.github.io/atom.xml" rel="self"/>
   
-  <link href="http://ylcheng1789.github.io/"/>
+  <link href="https://aspirant02.github.io/"/>
   <updated>2024-09-02T16:15:05.579Z</updated>
-  <id>http://ylcheng1789.github.io/</id>
+  <id>https://aspirant02.github.io/</id>
   
   <author>
-    <name>程月龙</name>
+    <name>符政辉</name>
     
   </author>
   
@@ -18,8 +18,8 @@
   
   <entry>
     <title>八股文系列-并发编程</title>
-    <link href="http://ylcheng1789.github.io/2024/09/02/%E5%85%AB%E8%82%A1%E6%96%87%E7%B3%BB%E5%88%97-%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/"/>
-    <id>http://ylcheng1789.github.io/2024/09/02/%E5%85%AB%E8%82%A1%E6%96%87%E7%B3%BB%E5%88%97-%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/</id>
+    <link href="https://aspirant02.github.io/2024/09/02/%E5%85%AB%E8%82%A1%E6%96%87%E7%B3%BB%E5%88%97-%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/"/>
+    <id>https://aspirant02.github.io/2024/09/02/%E5%85%AB%E8%82%A1%E6%96%87%E7%B3%BB%E5%88%97-%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/</id>
     <published>2024-09-02T15:11:35.000Z</published>
     <updated>2024-09-02T16:15:05.579Z</updated>
     
@@ -30,17 +30,17 @@
     
     
     
-    <category term="八股文" scheme="http://ylcheng1789.github.io/categories/%E5%85%AB%E8%82%A1%E6%96%87/"/>
+    <category term="八股文" scheme="https://aspirant02.github.io/categories/%E5%85%AB%E8%82%A1%E6%96%87/"/>
     
     
-    <category term="并发编程" scheme="http://ylcheng1789.github.io/tags/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/"/>
+    <category term="并发编程" scheme="https://aspirant02.github.io/tags/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/"/>
     
   </entry>
   
   <entry>
     <title>八股文系列-Java集合框架</title>
-    <link href="http://ylcheng1789.github.io/2024/09/01/%E5%85%AB%E8%82%A1%E6%96%87%E7%B3%BB%E5%88%97-Java%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6/"/>
-    <id>http://ylcheng1789.github.io/2024/09/01/%E5%85%AB%E8%82%A1%E6%96%87%E7%B3%BB%E5%88%97-Java%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6/</id>
+    <link href="https://aspirant02.github.io/2024/09/01/%E5%85%AB%E8%82%A1%E6%96%87%E7%B3%BB%E5%88%97-Java%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6/"/>
+    <id>https://aspirant02.github.io/2024/09/01/%E5%85%AB%E8%82%A1%E6%96%87%E7%B3%BB%E5%88%97-Java%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6/</id>
     <published>2024-09-01T05:22:24.000Z</published>
     <updated>2024-09-01T06:01:13.440Z</updated>
     
@@ -51,17 +51,17 @@
     
     
     
-    <category term="八股文" scheme="http://ylcheng1789.github.io/categories/%E5%85%AB%E8%82%A1%E6%96%87/"/>
+    <category term="八股文" scheme="https://aspirant02.github.io/categories/%E5%85%AB%E8%82%A1%E6%96%87/"/>
     
     
-    <category term="Java集合" scheme="http://ylcheng1789.github.io/tags/Java%E9%9B%86%E5%90%88/"/>
+    <category term="Java集合" scheme="https://aspirant02.github.io/tags/Java%E9%9B%86%E5%90%88/"/>
     
   </entry>
   
   <entry>
     <title>我的博客优化历程—自动初始化Gitalk</title>
-    <link href="http://ylcheng1789.github.io/2024/08/11/%E5%8D%9A%E5%AE%A2%E4%BC%98%E5%8C%96%E2%80%94%E8%87%AA%E5%8A%A8%E5%88%9D%E5%A7%8B%E5%8C%96Gitalk/"/>
-    <id>http://ylcheng1789.github.io/2024/08/11/%E5%8D%9A%E5%AE%A2%E4%BC%98%E5%8C%96%E2%80%94%E8%87%AA%E5%8A%A8%E5%88%9D%E5%A7%8B%E5%8C%96Gitalk/</id>
+    <link href="https://aspirant02.github.io/2024/08/11/%E5%8D%9A%E5%AE%A2%E4%BC%98%E5%8C%96%E2%80%94%E8%87%AA%E5%8A%A8%E5%88%9D%E5%A7%8B%E5%8C%96Gitalk/"/>
+    <id>https://aspirant02.github.io/2024/08/11/%E5%8D%9A%E5%AE%A2%E4%BC%98%E5%8C%96%E2%80%94%E8%87%AA%E5%8A%A8%E5%88%9D%E5%A7%8B%E5%8C%96Gitalk/</id>
     <published>2024-08-11T13:01:24.000Z</published>
     <updated>2024-08-30T14:50:41.400Z</updated>
     
@@ -72,17 +72,17 @@
     
     
     
-    <category term="Bufferfly博客" scheme="http://ylcheng1789.github.io/categories/Bufferfly%E5%8D%9A%E5%AE%A2/"/>
+    <category term="Bufferfly博客" scheme="https://aspirant02.github.io/categories/Bufferfly%E5%8D%9A%E5%AE%A2/"/>
     
     
-    <category term="Bufferfly博客" scheme="http://ylcheng1789.github.io/tags/Bufferfly%E5%8D%9A%E5%AE%A2/"/>
+    <category term="Bufferfly博客" scheme="https://aspirant02.github.io/tags/Bufferfly%E5%8D%9A%E5%AE%A2/"/>
     
   </entry>
   
   <entry>
     <title>一起写个数据库—10.服务端客户端的实现及其通信规则</title>
-    <link href="http://ylcheng1789.github.io/2024/06/11/%E4%B8%80%E8%B5%B7%E5%86%99%E4%B8%AA%E6%95%B0%E6%8D%AE%E5%BA%93%E2%80%9410.%E6%9C%8D%E5%8A%A1%E7%AB%AF%E5%AE%A2%E6%88%B7%E7%AB%AF%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%8F%8A%E5%85%B6%E9%80%9A%E4%BF%A1%E8%A7%84%E5%88%99/"/>
-    <id>http://ylcheng1789.github.io/2024/06/11/%E4%B8%80%E8%B5%B7%E5%86%99%E4%B8%AA%E6%95%B0%E6%8D%AE%E5%BA%93%E2%80%9410.%E6%9C%8D%E5%8A%A1%E7%AB%AF%E5%AE%A2%E6%88%B7%E7%AB%AF%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%8F%8A%E5%85%B6%E9%80%9A%E4%BF%A1%E8%A7%84%E5%88%99/</id>
+    <link href="https://aspirant02.github.io/2024/06/11/%E4%B8%80%E8%B5%B7%E5%86%99%E4%B8%AA%E6%95%B0%E6%8D%AE%E5%BA%93%E2%80%9410.%E6%9C%8D%E5%8A%A1%E7%AB%AF%E5%AE%A2%E6%88%B7%E7%AB%AF%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%8F%8A%E5%85%B6%E9%80%9A%E4%BF%A1%E8%A7%84%E5%88%99/"/>
+    <id>https://aspirant02.github.io/2024/06/11/%E4%B8%80%E8%B5%B7%E5%86%99%E4%B8%AA%E6%95%B0%E6%8D%AE%E5%BA%93%E2%80%9410.%E6%9C%8D%E5%8A%A1%E7%AB%AF%E5%AE%A2%E6%88%B7%E7%AB%AF%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%8F%8A%E5%85%B6%E9%80%9A%E4%BF%A1%E8%A7%84%E5%88%99/</id>
     <published>2024-06-11T13:01:24.000Z</published>
     <updated>2024-08-30T14:53:22.489Z</updated>
     
@@ -93,17 +93,17 @@
     
     
     
-    <category term="MYDB" scheme="http://ylcheng1789.github.io/categories/MYDB/"/>
+    <category term="MYDB" scheme="https://aspirant02.github.io/categories/MYDB/"/>
     
     
-    <category term="MySQL" scheme="http://ylcheng1789.github.io/tags/MySQL/"/>
+    <category term="MySQL" scheme="https://aspirant02.github.io/tags/MySQL/"/>
     
   </entry>
   
   <entry>
     <title>一起写个数据库—9.字段与表管理</title>
-    <link href="http://ylcheng1789.github.io/2024/06/10/%E4%B8%80%E8%B5%B7%E5%86%99%E4%B8%AA%E6%95%B0%E6%8D%AE%E5%BA%93%E2%80%949.%E5%AD%97%E6%AE%B5%E4%B8%8E%E8%A1%A8%E7%AE%A1%E7%90%86/"/>
-    <id>http://ylcheng1789.github.io/2024/06/10/%E4%B8%80%E8%B5%B7%E5%86%99%E4%B8%AA%E6%95%B0%E6%8D%AE%E5%BA%93%E2%80%949.%E5%AD%97%E6%AE%B5%E4%B8%8E%E8%A1%A8%E7%AE%A1%E7%90%86/</id>
+    <link href="https://aspirant02.github.io/2024/06/10/%E4%B8%80%E8%B5%B7%E5%86%99%E4%B8%AA%E6%95%B0%E6%8D%AE%E5%BA%93%E2%80%949.%E5%AD%97%E6%AE%B5%E4%B8%8E%E8%A1%A8%E7%AE%A1%E7%90%86/"/>
+    <id>https://aspirant02.github.io/2024/06/10/%E4%B8%80%E8%B5%B7%E5%86%99%E4%B8%AA%E6%95%B0%E6%8D%AE%E5%BA%93%E2%80%949.%E5%AD%97%E6%AE%B5%E4%B8%8E%E8%A1%A8%E7%AE%A1%E7%90%86/</id>
     <published>2024-06-10T13:01:24.000Z</published>
     <updated>2024-08-30T14:53:10.334Z</updated>
     
@@ -114,17 +114,17 @@
     
     
     
-    <category term="MYDB" scheme="http://ylcheng1789.github.io/categories/MYDB/"/>
+    <category term="MYDB" scheme="https://aspirant02.github.io/categories/MYDB/"/>
     
     
-    <category term="MySQL" scheme="http://ylcheng1789.github.io/tags/MySQL/"/>
+    <category term="MySQL" scheme="https://aspirant02.github.io/tags/MySQL/"/>
     
   </entry>
   
   <entry>
     <title>一起写个数据库—8.索引管理器</title>
-    <link href="http://ylcheng1789.github.io/2024/06/09/%E4%B8%80%E8%B5%B7%E5%86%99%E4%B8%AA%E6%95%B0%E6%8D%AE%E5%BA%93%E2%80%948.%E7%B4%A2%E5%BC%95%E7%AE%A1%E7%90%86%E5%99%A8/"/>
-    <id>http://ylcheng1789.github.io/2024/06/09/%E4%B8%80%E8%B5%B7%E5%86%99%E4%B8%AA%E6%95%B0%E6%8D%AE%E5%BA%93%E2%80%948.%E7%B4%A2%E5%BC%95%E7%AE%A1%E7%90%86%E5%99%A8/</id>
+    <link href="https://aspirant02.github.io/2024/06/09/%E4%B8%80%E8%B5%B7%E5%86%99%E4%B8%AA%E6%95%B0%E6%8D%AE%E5%BA%93%E2%80%948.%E7%B4%A2%E5%BC%95%E7%AE%A1%E7%90%86%E5%99%A8/"/>
+    <id>https://aspirant02.github.io/2024/06/09/%E4%B8%80%E8%B5%B7%E5%86%99%E4%B8%AA%E6%95%B0%E6%8D%AE%E5%BA%93%E2%80%948.%E7%B4%A2%E5%BC%95%E7%AE%A1%E7%90%86%E5%99%A8/</id>
     <published>2024-06-09T13:01:24.000Z</published>
     <updated>2024-08-30T14:53:00.970Z</updated>
     
@@ -135,17 +135,17 @@
     
     
     
-    <category term="MYDB" scheme="http://ylcheng1789.github.io/categories/MYDB/"/>
+    <category term="MYDB" scheme="https://aspirant02.github.io/categories/MYDB/"/>
     
     
-    <category term="MySQL" scheme="http://ylcheng1789.github.io/tags/MySQL/"/>
+    <category term="MySQL" scheme="https://aspirant02.github.io/tags/MySQL/"/>
     
   </entry>
   
   <entry>
     <title>一起写个数据库—7.死锁检测与VM的实现</title>
-    <link href="http://ylcheng1789.github.io/2024/06/08/%E4%B8%80%E8%B5%B7%E5%86%99%E4%B8%AA%E6%95%B0%E6%8D%AE%E5%BA%93%E2%80%947.%E6%AD%BB%E9%94%81%E6%A3%80%E6%B5%8B%E4%B8%8EVM%E7%9A%84%E5%AE%9E%E7%8E%B0/"/>
-    <id>http://ylcheng1789.github.io/2024/06/08/%E4%B8%80%E8%B5%B7%E5%86%99%E4%B8%AA%E6%95%B0%E6%8D%AE%E5%BA%93%E2%80%947.%E6%AD%BB%E9%94%81%E6%A3%80%E6%B5%8B%E4%B8%8EVM%E7%9A%84%E5%AE%9E%E7%8E%B0/</id>
+    <link href="https://aspirant02.github.io/2024/06/08/%E4%B8%80%E8%B5%B7%E5%86%99%E4%B8%AA%E6%95%B0%E6%8D%AE%E5%BA%93%E2%80%947.%E6%AD%BB%E9%94%81%E6%A3%80%E6%B5%8B%E4%B8%8EVM%E7%9A%84%E5%AE%9E%E7%8E%B0/"/>
+    <id>https://aspirant02.github.io/2024/06/08/%E4%B8%80%E8%B5%B7%E5%86%99%E4%B8%AA%E6%95%B0%E6%8D%AE%E5%BA%93%E2%80%947.%E6%AD%BB%E9%94%81%E6%A3%80%E6%B5%8B%E4%B8%8EVM%E7%9A%84%E5%AE%9E%E7%8E%B0/</id>
     <published>2024-06-08T13:01:24.000Z</published>
     <updated>2024-08-30T14:52:48.652Z</updated>
     
@@ -156,17 +156,17 @@
     
     
     
-    <category term="MYDB" scheme="http://ylcheng1789.github.io/categories/MYDB/"/>
+    <category term="MYDB" scheme="https://aspirant02.github.io/categories/MYDB/"/>
     
     
-    <category term="MySQL" scheme="http://ylcheng1789.github.io/tags/MySQL/"/>
+    <category term="MySQL" scheme="https://aspirant02.github.io/tags/MySQL/"/>
     
   </entry>
   
   <entry>
     <title>一起写个数据库—6.记录的版本与事务隔离</title>
-    <link href="http://ylcheng1789.github.io/2024/06/07/%E4%B8%80%E8%B5%B7%E5%86%99%E4%B8%AA%E6%95%B0%E6%8D%AE%E5%BA%93%E2%80%946.%E8%AE%B0%E5%BD%95%E7%9A%84%E7%89%88%E6%9C%AC%E4%B8%8E%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB/"/>
-    <id>http://ylcheng1789.github.io/2024/06/07/%E4%B8%80%E8%B5%B7%E5%86%99%E4%B8%AA%E6%95%B0%E6%8D%AE%E5%BA%93%E2%80%946.%E8%AE%B0%E5%BD%95%E7%9A%84%E7%89%88%E6%9C%AC%E4%B8%8E%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB/</id>
+    <link href="https://aspirant02.github.io/2024/06/07/%E4%B8%80%E8%B5%B7%E5%86%99%E4%B8%AA%E6%95%B0%E6%8D%AE%E5%BA%93%E2%80%946.%E8%AE%B0%E5%BD%95%E7%9A%84%E7%89%88%E6%9C%AC%E4%B8%8E%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB/"/>
+    <id>https://aspirant02.github.io/2024/06/07/%E4%B8%80%E8%B5%B7%E5%86%99%E4%B8%AA%E6%95%B0%E6%8D%AE%E5%BA%93%E2%80%946.%E8%AE%B0%E5%BD%95%E7%9A%84%E7%89%88%E6%9C%AC%E4%B8%8E%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB/</id>
     <published>2024-06-07T13:01:24.000Z</published>
     <updated>2024-08-30T14:52:13.830Z</updated>
     
@@ -177,17 +177,17 @@
     
     
     
-    <category term="MYDB" scheme="http://ylcheng1789.github.io/categories/MYDB/"/>
+    <category term="MYDB" scheme="https://aspirant02.github.io/categories/MYDB/"/>
     
     
-    <category term="MySQL" scheme="http://ylcheng1789.github.io/tags/MySQL/"/>
+    <category term="MySQL" scheme="https://aspirant02.github.io/tags/MySQL/"/>
     
   </entry>
   
   <entry>
     <title>一起写个数据库—5.页面索引与DM层的实现</title>
-    <link href="http://ylcheng1789.github.io/2024/06/06/%E4%B8%80%E8%B5%B7%E5%86%99%E4%B8%AA%E6%95%B0%E6%8D%AE%E5%BA%93%E2%80%945.%E9%A1%B5%E9%9D%A2%E7%B4%A2%E5%BC%95%E4%B8%8EDM%E5%B1%82%E7%9A%84%E5%AE%9E%E7%8E%B0/"/>
-    <id>http://ylcheng1789.github.io/2024/06/06/%E4%B8%80%E8%B5%B7%E5%86%99%E4%B8%AA%E6%95%B0%E6%8D%AE%E5%BA%93%E2%80%945.%E9%A1%B5%E9%9D%A2%E7%B4%A2%E5%BC%95%E4%B8%8EDM%E5%B1%82%E7%9A%84%E5%AE%9E%E7%8E%B0/</id>
+    <link href="https://aspirant02.github.io/2024/06/06/%E4%B8%80%E8%B5%B7%E5%86%99%E4%B8%AA%E6%95%B0%E6%8D%AE%E5%BA%93%E2%80%945.%E9%A1%B5%E9%9D%A2%E7%B4%A2%E5%BC%95%E4%B8%8EDM%E5%B1%82%E7%9A%84%E5%AE%9E%E7%8E%B0/"/>
+    <id>https://aspirant02.github.io/2024/06/06/%E4%B8%80%E8%B5%B7%E5%86%99%E4%B8%AA%E6%95%B0%E6%8D%AE%E5%BA%93%E2%80%945.%E9%A1%B5%E9%9D%A2%E7%B4%A2%E5%BC%95%E4%B8%8EDM%E5%B1%82%E7%9A%84%E5%AE%9E%E7%8E%B0/</id>
     <published>2024-06-06T13:01:24.000Z</published>
     <updated>2024-08-30T14:54:24.489Z</updated>
     
@@ -198,17 +198,17 @@
     
     
     
-    <category term="MYDB" scheme="http://ylcheng1789.github.io/categories/MYDB/"/>
+    <category term="MYDB" scheme="https://aspirant02.github.io/categories/MYDB/"/>
     
     
-    <category term="MySQL" scheme="http://ylcheng1789.github.io/tags/MySQL/"/>
+    <category term="MySQL" scheme="https://aspirant02.github.io/tags/MySQL/"/>
     
   </entry>
   
   <entry>
     <title>一起写个数据库—4.日志文件与恢复策略</title>
-    <link href="http://ylcheng1789.github.io/2024/06/05/%E4%B8%80%E8%B5%B7%E5%86%99%E4%B8%AA%E6%95%B0%E6%8D%AE%E5%BA%93%E2%80%944.%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E4%B8%8E%E6%81%A2%E5%A4%8D%E7%AD%96%E7%95%A5/"/>
-    <id>http://ylcheng1789.github.io/2024/06/05/%E4%B8%80%E8%B5%B7%E5%86%99%E4%B8%AA%E6%95%B0%E6%8D%AE%E5%BA%93%E2%80%944.%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E4%B8%8E%E6%81%A2%E5%A4%8D%E7%AD%96%E7%95%A5/</id>
+    <link href="https://aspirant02.github.io/2024/06/05/%E4%B8%80%E8%B5%B7%E5%86%99%E4%B8%AA%E6%95%B0%E6%8D%AE%E5%BA%93%E2%80%944.%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E4%B8%8E%E6%81%A2%E5%A4%8D%E7%AD%96%E7%95%A5/"/>
+    <id>https://aspirant02.github.io/2024/06/05/%E4%B8%80%E8%B5%B7%E5%86%99%E4%B8%AA%E6%95%B0%E6%8D%AE%E5%BA%93%E2%80%944.%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E4%B8%8E%E6%81%A2%E5%A4%8D%E7%AD%96%E7%95%A5/</id>
     <published>2024-06-05T13:01:24.000Z</published>
     <updated>2024-08-30T14:51:51.758Z</updated>
     
@@ -219,17 +219,17 @@
     
     
     
-    <category term="MYDB" scheme="http://ylcheng1789.github.io/categories/MYDB/"/>
+    <category term="MYDB" scheme="https://aspirant02.github.io/categories/MYDB/"/>
     
     
-    <category term="MySQL" scheme="http://ylcheng1789.github.io/tags/MySQL/"/>
+    <category term="MySQL" scheme="https://aspirant02.github.io/tags/MySQL/"/>
     
   </entry>
   
   <entry>
     <title>一起写个数据库—3.数据页的缓存与管理</title>
-    <link href="http://ylcheng1789.github.io/2024/06/04/%E4%B8%80%E8%B5%B7%E5%86%99%E4%B8%AA%E6%95%B0%E6%8D%AE%E5%BA%93%E2%80%943.%E6%95%B0%E6%8D%AE%E9%A1%B5%E7%9A%84%E7%BC%93%E5%AD%98%E4%B8%8E%E7%AE%A1%E7%90%86/"/>
-    <id>http://ylcheng1789.github.io/2024/06/04/%E4%B8%80%E8%B5%B7%E5%86%99%E4%B8%AA%E6%95%B0%E6%8D%AE%E5%BA%93%E2%80%943.%E6%95%B0%E6%8D%AE%E9%A1%B5%E7%9A%84%E7%BC%93%E5%AD%98%E4%B8%8E%E7%AE%A1%E7%90%86/</id>
+    <link href="https://aspirant02.github.io/2024/06/04/%E4%B8%80%E8%B5%B7%E5%86%99%E4%B8%AA%E6%95%B0%E6%8D%AE%E5%BA%93%E2%80%943.%E6%95%B0%E6%8D%AE%E9%A1%B5%E7%9A%84%E7%BC%93%E5%AD%98%E4%B8%8E%E7%AE%A1%E7%90%86/"/>
+    <id>https://aspirant02.github.io/2024/06/04/%E4%B8%80%E8%B5%B7%E5%86%99%E4%B8%AA%E6%95%B0%E6%8D%AE%E5%BA%93%E2%80%943.%E6%95%B0%E6%8D%AE%E9%A1%B5%E7%9A%84%E7%BC%93%E5%AD%98%E4%B8%8E%E7%AE%A1%E7%90%86/</id>
     <published>2024-06-04T13:01:24.000Z</published>
     <updated>2024-08-30T14:51:38.122Z</updated>
     
@@ -240,17 +240,17 @@
     
     
     
-    <category term="MYDB" scheme="http://ylcheng1789.github.io/categories/MYDB/"/>
+    <category term="MYDB" scheme="https://aspirant02.github.io/categories/MYDB/"/>
     
     
-    <category term="MySQL" scheme="http://ylcheng1789.github.io/tags/MySQL/"/>
+    <category term="MySQL" scheme="https://aspirant02.github.io/tags/MySQL/"/>
     
   </entry>
   
   <entry>
     <title>一起写个数据库—2.引用计数缓存框架和共享内存数组</title>
-    <link href="http://ylcheng1789.github.io/2024/06/03/%E4%B8%80%E8%B5%B7%E5%86%99%E4%B8%AA%E6%95%B0%E6%8D%AE%E5%BA%93%E2%80%942.%E5%BC%95%E7%94%A8%E8%AE%A1%E6%95%B0%E7%BC%93%E5%AD%98%E6%A1%86%E6%9E%B6%E5%92%8C%E5%85%B1%E4%BA%AB%E5%86%85%E5%AD%98%E6%95%B0%E7%BB%84/"/>
-    <id>http://ylcheng1789.github.io/2024/06/03/%E4%B8%80%E8%B5%B7%E5%86%99%E4%B8%AA%E6%95%B0%E6%8D%AE%E5%BA%93%E2%80%942.%E5%BC%95%E7%94%A8%E8%AE%A1%E6%95%B0%E7%BC%93%E5%AD%98%E6%A1%86%E6%9E%B6%E5%92%8C%E5%85%B1%E4%BA%AB%E5%86%85%E5%AD%98%E6%95%B0%E7%BB%84/</id>
+    <link href="https://aspirant02.github.io/2024/06/03/%E4%B8%80%E8%B5%B7%E5%86%99%E4%B8%AA%E6%95%B0%E6%8D%AE%E5%BA%93%E2%80%942.%E5%BC%95%E7%94%A8%E8%AE%A1%E6%95%B0%E7%BC%93%E5%AD%98%E6%A1%86%E6%9E%B6%E5%92%8C%E5%85%B1%E4%BA%AB%E5%86%85%E5%AD%98%E6%95%B0%E7%BB%84/"/>
+    <id>https://aspirant02.github.io/2024/06/03/%E4%B8%80%E8%B5%B7%E5%86%99%E4%B8%AA%E6%95%B0%E6%8D%AE%E5%BA%93%E2%80%942.%E5%BC%95%E7%94%A8%E8%AE%A1%E6%95%B0%E7%BC%93%E5%AD%98%E6%A1%86%E6%9E%B6%E5%92%8C%E5%85%B1%E4%BA%AB%E5%86%85%E5%AD%98%E6%95%B0%E7%BB%84/</id>
     <published>2024-06-03T13:01:24.000Z</published>
     <updated>2024-08-30T14:51:25.195Z</updated>
     
@@ -261,17 +261,17 @@
     
     
     
-    <category term="MYDB" scheme="http://ylcheng1789.github.io/categories/MYDB/"/>
+    <category term="MYDB" scheme="https://aspirant02.github.io/categories/MYDB/"/>
     
     
-    <category term="MySQL" scheme="http://ylcheng1789.github.io/tags/MySQL/"/>
+    <category term="MySQL" scheme="https://aspirant02.github.io/tags/MySQL/"/>
     
   </entry>
   
   <entry>
     <title>一起写个数据库—1.从最简单的TM开始</title>
-    <link href="http://ylcheng1789.github.io/2024/06/02/%E4%B8%80%E8%B5%B7%E5%86%99%E4%B8%AA%E6%95%B0%E6%8D%AE%E5%BA%93%E2%80%941.%E4%BB%8E%E6%9C%80%E7%AE%80%E5%8D%95%E7%9A%84TM%E5%BC%80%E5%A7%8B/"/>
-    <id>http://ylcheng1789.github.io/2024/06/02/%E4%B8%80%E8%B5%B7%E5%86%99%E4%B8%AA%E6%95%B0%E6%8D%AE%E5%BA%93%E2%80%941.%E4%BB%8E%E6%9C%80%E7%AE%80%E5%8D%95%E7%9A%84TM%E5%BC%80%E5%A7%8B/</id>
+    <link href="https://aspirant02.github.io/2024/06/02/%E4%B8%80%E8%B5%B7%E5%86%99%E4%B8%AA%E6%95%B0%E6%8D%AE%E5%BA%93%E2%80%941.%E4%BB%8E%E6%9C%80%E7%AE%80%E5%8D%95%E7%9A%84TM%E5%BC%80%E5%A7%8B/"/>
+    <id>https://aspirant02.github.io/2024/06/02/%E4%B8%80%E8%B5%B7%E5%86%99%E4%B8%AA%E6%95%B0%E6%8D%AE%E5%BA%93%E2%80%941.%E4%BB%8E%E6%9C%80%E7%AE%80%E5%8D%95%E7%9A%84TM%E5%BC%80%E5%A7%8B/</id>
     <published>2024-06-02T13:01:24.000Z</published>
     <updated>2024-08-30T14:53:45.205Z</updated>
     
@@ -282,17 +282,17 @@
     
     
     
-    <category term="MYDB" scheme="http://ylcheng1789.github.io/categories/MYDB/"/>
+    <category term="MYDB" scheme="https://aspirant02.github.io/categories/MYDB/"/>
     
     
-    <category term="MySQL" scheme="http://ylcheng1789.github.io/tags/MySQL/"/>
+    <category term="MySQL" scheme="https://aspirant02.github.io/tags/MySQL/"/>
     
   </entry>
   
   <entry>
     <title>一起写个数据库—0.项目结构和一些不得不说的话</title>
-    <link href="http://ylcheng1789.github.io/2024/06/01/%E4%B8%80%E8%B5%B7%E5%86%99%E4%B8%AA%E6%95%B0%E6%8D%AE%E5%BA%93%E2%80%940.%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84%E5%92%8C%E4%B8%80%E4%BA%9B%E4%B8%8D%E5%BE%97%E4%B8%8D%E8%AF%B4%E7%9A%84%E8%AF%9D/"/>
-    <id>http://ylcheng1789.github.io/2024/06/01/%E4%B8%80%E8%B5%B7%E5%86%99%E4%B8%AA%E6%95%B0%E6%8D%AE%E5%BA%93%E2%80%940.%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84%E5%92%8C%E4%B8%80%E4%BA%9B%E4%B8%8D%E5%BE%97%E4%B8%8D%E8%AF%B4%E7%9A%84%E8%AF%9D/</id>
+    <link href="https://aspirant02.github.io/2024/06/01/%E4%B8%80%E8%B5%B7%E5%86%99%E4%B8%AA%E6%95%B0%E6%8D%AE%E5%BA%93%E2%80%940.%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84%E5%92%8C%E4%B8%80%E4%BA%9B%E4%B8%8D%E5%BE%97%E4%B8%8D%E8%AF%B4%E7%9A%84%E8%AF%9D/"/>
+    <id>https://aspirant02.github.io/2024/06/01/%E4%B8%80%E8%B5%B7%E5%86%99%E4%B8%AA%E6%95%B0%E6%8D%AE%E5%BA%93%E2%80%940.%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84%E5%92%8C%E4%B8%80%E4%BA%9B%E4%B8%8D%E5%BE%97%E4%B8%8D%E8%AF%B4%E7%9A%84%E8%AF%9D/</id>
     <published>2024-06-01T13:01:24.000Z</published>
     <updated>2024-08-30T14:50:55.378Z</updated>
     
@@ -303,17 +303,17 @@
     
     
     
-    <category term="MYDB" scheme="http://ylcheng1789.github.io/categories/MYDB/"/>
+    <category term="MYDB" scheme="https://aspirant02.github.io/categories/MYDB/"/>
     
     
-    <category term="MySQL" scheme="http://ylcheng1789.github.io/tags/MySQL/"/>
+    <category term="MySQL" scheme="https://aspirant02.github.io/tags/MySQL/"/>
     
   </entry>
   
   <entry>
     <title>SpringBoot-AOP切面编程</title>
-    <link href="http://ylcheng1789.github.io/2024/05/12/SpringBoot-AOP%E5%88%87%E9%9D%A2%E7%BC%96%E7%A8%8B/"/>
-    <id>http://ylcheng1789.github.io/2024/05/12/SpringBoot-AOP%E5%88%87%E9%9D%A2%E7%BC%96%E7%A8%8B/</id>
+    <link href="https://aspirant02.github.io/2024/05/12/SpringBoot-AOP%E5%88%87%E9%9D%A2%E7%BC%96%E7%A8%8B/"/>
+    <id>https://aspirant02.github.io/2024/05/12/SpringBoot-AOP%E5%88%87%E9%9D%A2%E7%BC%96%E7%A8%8B/</id>
     <published>2024-05-12T08:18:17.000Z</published>
     <updated>2024-08-29T09:10:54.529Z</updated>
     
@@ -324,19 +324,19 @@
     
     
     
-    <category term="SpringBoot" scheme="http://ylcheng1789.github.io/categories/SpringBoot/"/>
+    <category term="SpringBoot" scheme="https://aspirant02.github.io/categories/SpringBoot/"/>
     
     
-    <category term="SpringBoot" scheme="http://ylcheng1789.github.io/tags/SpringBoot/"/>
+    <category term="SpringBoot" scheme="https://aspirant02.github.io/tags/SpringBoot/"/>
     
-    <category term="Java开发" scheme="http://ylcheng1789.github.io/tags/Java%E5%BC%80%E5%8F%91/"/>
+    <category term="Java开发" scheme="https://aspirant02.github.io/tags/Java%E5%BC%80%E5%8F%91/"/>
     
   </entry>
   
   <entry>
     <title>SpringBoot-事务管理</title>
-    <link href="http://ylcheng1789.github.io/2024/05/11/SpringBoot-%E4%BA%8B%E5%8A%A1%E7%AE%A1%E7%90%86/"/>
-    <id>http://ylcheng1789.github.io/2024/05/11/SpringBoot-%E4%BA%8B%E5%8A%A1%E7%AE%A1%E7%90%86/</id>
+    <link href="https://aspirant02.github.io/2024/05/11/SpringBoot-%E4%BA%8B%E5%8A%A1%E7%AE%A1%E7%90%86/"/>
+    <id>https://aspirant02.github.io/2024/05/11/SpringBoot-%E4%BA%8B%E5%8A%A1%E7%AE%A1%E7%90%86/</id>
     <published>2024-05-11T03:44:53.000Z</published>
     <updated>2024-08-29T09:11:29.768Z</updated>
     
@@ -347,19 +347,19 @@
     
     
     
-    <category term="SpringBoot" scheme="http://ylcheng1789.github.io/categories/SpringBoot/"/>
+    <category term="SpringBoot" scheme="https://aspirant02.github.io/categories/SpringBoot/"/>
     
     
-    <category term="SpringBoot" scheme="http://ylcheng1789.github.io/tags/SpringBoot/"/>
+    <category term="SpringBoot" scheme="https://aspirant02.github.io/tags/SpringBoot/"/>
     
-    <category term="Java开发" scheme="http://ylcheng1789.github.io/tags/Java%E5%BC%80%E5%8F%91/"/>
+    <category term="Java开发" scheme="https://aspirant02.github.io/tags/Java%E5%BC%80%E5%8F%91/"/>
     
   </entry>
   
   <entry>
     <title>SpringBoot-全局异常处理器</title>
-    <link href="http://ylcheng1789.github.io/2024/05/10/SpringBoot-%E5%85%A8%E5%B1%80%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E5%99%A8/"/>
-    <id>http://ylcheng1789.github.io/2024/05/10/SpringBoot-%E5%85%A8%E5%B1%80%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E5%99%A8/</id>
+    <link href="https://aspirant02.github.io/2024/05/10/SpringBoot-%E5%85%A8%E5%B1%80%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E5%99%A8/"/>
+    <id>https://aspirant02.github.io/2024/05/10/SpringBoot-%E5%85%A8%E5%B1%80%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E5%99%A8/</id>
     <published>2024-05-10T13:18:17.000Z</published>
     <updated>2024-08-29T09:11:21.135Z</updated>
     
@@ -370,19 +370,19 @@
     
     
     
-    <category term="SpringBoot" scheme="http://ylcheng1789.github.io/categories/SpringBoot/"/>
+    <category term="SpringBoot" scheme="https://aspirant02.github.io/categories/SpringBoot/"/>
     
     
-    <category term="SpringBoot" scheme="http://ylcheng1789.github.io/tags/SpringBoot/"/>
+    <category term="SpringBoot" scheme="https://aspirant02.github.io/tags/SpringBoot/"/>
     
-    <category term="Java开发" scheme="http://ylcheng1789.github.io/tags/Java%E5%BC%80%E5%8F%91/"/>
+    <category term="Java开发" scheme="https://aspirant02.github.io/tags/Java%E5%BC%80%E5%8F%91/"/>
     
   </entry>
   
   <entry>
     <title>SpringBoot-过滤器拦截器</title>
-    <link href="http://ylcheng1789.github.io/2024/05/10/SpringBoot-%E8%BF%87%E6%BB%A4%E5%99%A8%E6%8B%A6%E6%88%AA%E5%99%A8/"/>
-    <id>http://ylcheng1789.github.io/2024/05/10/SpringBoot-%E8%BF%87%E6%BB%A4%E5%99%A8%E6%8B%A6%E6%88%AA%E5%99%A8/</id>
+    <link href="https://aspirant02.github.io/2024/05/10/SpringBoot-%E8%BF%87%E6%BB%A4%E5%99%A8%E6%8B%A6%E6%88%AA%E5%99%A8/"/>
+    <id>https://aspirant02.github.io/2024/05/10/SpringBoot-%E8%BF%87%E6%BB%A4%E5%99%A8%E6%8B%A6%E6%88%AA%E5%99%A8/</id>
     <published>2024-05-10T12:08:17.000Z</published>
     <updated>2024-08-29T09:11:11.877Z</updated>
     
@@ -393,19 +393,19 @@
     
     
     
-    <category term="SpringBoot" scheme="http://ylcheng1789.github.io/categories/SpringBoot/"/>
+    <category term="SpringBoot" scheme="https://aspirant02.github.io/categories/SpringBoot/"/>
     
     
-    <category term="SpringBoot" scheme="http://ylcheng1789.github.io/tags/SpringBoot/"/>
+    <category term="SpringBoot" scheme="https://aspirant02.github.io/tags/SpringBoot/"/>
     
-    <category term="Java开发" scheme="http://ylcheng1789.github.io/tags/Java%E5%BC%80%E5%8F%91/"/>
+    <category term="Java开发" scheme="https://aspirant02.github.io/tags/Java%E5%BC%80%E5%8F%91/"/>
     
   </entry>
   
   <entry>
     <title>SpringBoot-登录校验技术</title>
-    <link href="http://ylcheng1789.github.io/2024/04/10/SpringBoot-%E7%99%BB%E5%BD%95%E6%A0%A1%E9%AA%8C%E6%8A%80%E6%9C%AF/"/>
-    <id>http://ylcheng1789.github.io/2024/04/10/SpringBoot-%E7%99%BB%E5%BD%95%E6%A0%A1%E9%AA%8C%E6%8A%80%E6%9C%AF/</id>
+    <link href="https://aspirant02.github.io/2024/04/10/SpringBoot-%E7%99%BB%E5%BD%95%E6%A0%A1%E9%AA%8C%E6%8A%80%E6%9C%AF/"/>
+    <id>https://aspirant02.github.io/2024/04/10/SpringBoot-%E7%99%BB%E5%BD%95%E6%A0%A1%E9%AA%8C%E6%8A%80%E6%9C%AF/</id>
     <published>2024-04-10T13:01:24.000Z</published>
     <updated>2024-08-29T09:11:02.993Z</updated>
     
@@ -416,12 +416,12 @@
     
     
     
-    <category term="SpringBoot" scheme="http://ylcheng1789.github.io/categories/SpringBoot/"/>
+    <category term="SpringBoot" scheme="https://aspirant02.github.io/categories/SpringBoot/"/>
     
     
-    <category term="SpringBoot" scheme="http://ylcheng1789.github.io/tags/SpringBoot/"/>
+    <category term="SpringBoot" scheme="https://aspirant02.github.io/tags/SpringBoot/"/>
     
-    <category term="Java开发" scheme="http://ylcheng1789.github.io/tags/Java%E5%BC%80%E5%8F%91/"/>
+    <category term="Java开发" scheme="https://aspirant02.github.io/tags/Java%E5%BC%80%E5%8F%91/"/>
     
   </entry>
   
