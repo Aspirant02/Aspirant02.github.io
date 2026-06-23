@@ -403,17 +403,6 @@ document.addEventListener('pjax:send', () => {
   let gitalkBodyObserver = null
   let gitalkObserverTimer = null
 
-  const refreshNewestCommentsSoon = () => {
-    if (typeof window.refreshNewestComments === "function") {
-      window.refreshNewestComments()
-      return
-    }
-
-    const cached = readCachedNewestComments()
-    if (cached.length > 0) {
-      generateHtml(cached)
-    }
-  }
 
   const bindGitalkCommentObserver = () => {
     if (gitalkDomObserver) return true
