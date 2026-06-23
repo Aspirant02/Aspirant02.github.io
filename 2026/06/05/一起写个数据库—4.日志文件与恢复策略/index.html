@@ -490,7 +490,7 @@ private static void doInsertLog(PageCache pc, byte[] log, int flag) {
     if (isCommentCount) {
       isCommentCount.textContent = n
     }
-    if (window.__gitalkCommentCount !== undefined && window.__gitalkCommentCount !== n) {
+    if (window.__gitalkCommentCount !== n) {
       window.__gitalkCommentRefreshUntil = Date.now() + 10000
       if (typeof window.refreshNewestComments === "function") {
         setTimeout(() => {

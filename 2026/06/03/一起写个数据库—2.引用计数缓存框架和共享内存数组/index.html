@@ -340,7 +340,7 @@ array2 := array1[5:]
     if (isCommentCount) {
       isCommentCount.textContent = n
     }
-    if (window.__gitalkCommentCount !== undefined && window.__gitalkCommentCount !== n) {
+    if (window.__gitalkCommentCount !== n) {
       window.__gitalkCommentRefreshUntil = Date.now() + 10000
       if (typeof window.refreshNewestComments === "function") {
         setTimeout(() => {
