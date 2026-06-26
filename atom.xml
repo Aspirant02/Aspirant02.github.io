@@ -6,7 +6,7 @@
   <link href="https://aspirant02.github.io/atom.xml" rel="self"/>
   
   <link href="https://aspirant02.github.io/"/>
-  <updated>2026-08-02T16:15:05.579Z</updated>
+  <updated>2026-08-08T13:01:24.000Z</updated>
   <id>https://aspirant02.github.io/</id>
   
   <author>
@@ -15,8 +15,133 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
-  
+
   <entry>
+    <title>AI开发-MCP：把工具接到大模型身边</title>
+    <link href="https://aspirant02.github.io/2026/06/12/AI%E5%BC%80%E5%8F%91-MCP%EF%BC%9A%E6%8A%8A%E5%B7%A5%E5%85%B7%E6%8E%A5%E5%88%B0%E5%A4%A7%E6%A8%A1%E5%9E%8B%E8%BA%AB%E8%BE%B9/"/>
+    <id>https://aspirant02.github.io/2026/06/12/AI%E5%BC%80%E5%8F%91-MCP%EF%BC%9A%E6%8A%8A%E5%B7%A5%E5%85%B7%E6%8E%A5%E5%88%B0%E5%A4%A7%E6%A8%A1%E5%9E%8B%E8%BA%AB%E8%BE%B9/</id>
+    <published>2026-06-12T13:01:24.000Z</published>
+    <updated>2026-06-12T13:01:24.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="前言"><a href="#%E5%89%8D%E8%A8%80" class="headerlink" title="前言"></a>前言</h1>
+<p>最近做 AI 应用时，我越来越觉得模型本身只是其中一部分。真正让一个 AI 应用变得有用的，往往是它能不能读取项目文件、查询数据库、调用内部系统、按固定流程完成任务。以前这些能力基本靠每个应用自己写一套插件系统，写到最后就会出现大量重复的适配代码。</p>
+<p>MCP，全称 Model Context Protocol，可以理解为给 AI 应用和外部系统之间加了一层标准协议。官方文档把它描述为一个开源标准，用来把 AI 应用连接到外部数据源、工具和工作流上。这个定义很朴素，但它解决的是 AI 应用里非常现实的问题：模型如何以统一方式拿到上下文，并安全地执行动作。</p>
+<h1 id="MCP 想解决什么问题"><a href="#MCP%20%E6%83%B3%E8%A7%A3%E5%86%B3%E4%BB%80%E4%B9%88%E9%97%AE%E9%A2%98" class="headerlink" title="MCP 想解决什么问题"></a>MCP 想解决什么问题</h1>
+<p>如果没有 MCP，一个编辑器、一个聊天机器人、一个自动化 Agent 想分别接入 Git、数据库、浏览器、工单系统，就需要各自维护一套接口。工具一多，就会变成 N 个客户端乘 M 个工具的组合复杂度。</p>
+<p>MCP 的思路是把外部能力封装成 MCP Server，AI 应用侧通过 MCP Client 连接它。这样工具只要按协议暴露能力，支持 MCP 的客户端就都可以接入。类比一下，它不是让每个模型都懂所有系统，而是提供一个通用插座。</p>
+<h1 id="几个核心角色"><a href="#%E5%87%A0%E4%B8%AA%E6%A0%B8%E5%BF%83%E8%A7%92%E8%89%B2" class="headerlink" title="几个核心角色"></a>几个核心角色</h1>
+<p>Host 是真正承载用户交互的 AI 应用，比如桌面助手、IDE、聊天客户端。Client 在 Host 内部，负责和某个 MCP Server 建立连接。Server 则负责暴露外部能力，比如文件读取、数据库查询、搜索、内部 API、固定提示模板等。</p>
+<p>从开发者视角看，Server 是最容易上手的入口。你可以先写一个只暴露 read_file、search_docs、query_issue 三个工具的小服务，让 AI 应用通过 MCP 调用它。以后换客户端时，只要协议支持，工具层不用跟着大改。</p>
+<h1 id="一个最小实践思路"><a href="#%E4%B8%80%E4%B8%AA%E6%9C%80%E5%B0%8F%E5%AE%9E%E8%B7%B5%E6%80%9D%E8%B7%AF" class="headerlink" title="一个最小实践思路"></a>一个最小实践思路</h1>
+<p>我会先从“只读工具”开始做 MCP Server，例如只允许读取某个项目目录、查询只读数据库视图、搜索文档索引。等权限边界和日志都清楚了，再开放写操作。</p>
+<p>实现时可以把每个工具当成普通后端接口：入参要有 schema，输出要结构化，错误也要明确。不要把“让模型自己猜”当成接口设计，工具越清晰，模型越不容易误用。</p>
+<h1 id="小结"><a href="#%E5%B0%8F%E7%BB%93" class="headerlink" title="小结"></a>小结</h1>
+<p>MCP 的价值不在于让模型变神奇，而在于让工具接入这件事更标准。对于独立开发者来说，它适合用来沉淀自己的常用能力：项目知识库、脚本工具、部署查询、数据库只读分析，都可以慢慢做成可复用的 MCP Server。</p>
+<p>参考资料：<a href="https://modelcontextprotocol.io/docs/getting-started/intro" target="_blank" rel="noopener">Model Context Protocol 官方文档</a>。</p>]]></content>
+    <summary type="html">MCP 可以理解为 AI 应用和外部工具之间的一层标准协议，让模型以统一方式读取上下文、调用工具和执行工作流。</summary>
+    <category term="AI开发" scheme="https://aspirant02.github.io/categories/AI%E5%BC%80%E5%8F%91/"/>
+    <category term="AI开发" scheme="https://aspirant02.github.io/tags/AI%E5%BC%80%E5%8F%91/"/>
+  </entry>
+  <entry>
+    <title>AI开发-RAG：让模型回答时先查资料</title>
+    <link href="https://aspirant02.github.io/2026/06/20/AI%E5%BC%80%E5%8F%91-RAG%EF%BC%9A%E8%AE%A9%E6%A8%A1%E5%9E%8B%E5%9B%9E%E7%AD%94%E6%97%B6%E5%85%88%E6%9F%A5%E8%B5%84%E6%96%99/"/>
+    <id>https://aspirant02.github.io/2026/06/20/AI%E5%BC%80%E5%8F%91-RAG%EF%BC%9A%E8%AE%A9%E6%A8%A1%E5%9E%8B%E5%9B%9E%E7%AD%94%E6%97%B6%E5%85%88%E6%9F%A5%E8%B5%84%E6%96%99/</id>
+    <published>2026-06-20T13:01:24.000Z</published>
+    <updated>2026-06-20T13:01:24.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="前言"><a href="#%E5%89%8D%E8%A8%80" class="headerlink" title="前言"></a>前言</h1>
+<p>RAG 是 Retrieval-Augmented Generation 的缩写，直译就是检索增强生成。这个概念这些年很火，但它的基本想法并不复杂：不要让大模型只凭训练参数回答，而是在生成之前先去知识库里检索相关资料，再把资料一起交给模型。</p>
+<p>很多企业内部问答、文档助手、代码库问答，本质上都是 RAG。因为这些知识经常更新，而且不一定出现在模型训练数据里。与其每次重新训练模型，不如维护一套可更新的外部知识库。</p>
+<h1 id="为什么需要 RAG"><a href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%20RAG" class="headerlink" title="为什么需要 RAG"></a>为什么需要 RAG</h1>
+<p>大模型擅长语言组织和模式归纳，但它不擅长保证知识一定最新、一定来自某个指定来源。RAG 把外部文档引入生成过程，可以缓解幻觉问题，也能让答案带上出处。</p>
+<p>原始 RAG 论文把模型参数里的知识称为 parametric memory，把外部索引里的知识称为 non-parametric memory。这个区分很有用：模型负责理解和表达，知识库负责提供可更新、可追溯的信息。</p>
+<h1 id="基本流程"><a href="#%E5%9F%BA%E6%9C%AC%E6%B5%81%E7%A8%8B" class="headerlink" title="基本流程"></a>基本流程</h1>
+<p>最常见的流程是四步：文档切分、向量化入库、问题检索、带上下文生成。文档切分不要太粗也不要太碎，太粗会把无关内容塞进上下文，太碎又容易丢失完整语义。</p>
+<p>检索阶段通常先用向量相似度召回，再用关键词、rerank 或业务规则二次排序。最后把最相关的片段放进 prompt，让模型基于这些片段回答。</p>
+<h1 id="开发时容易踩的坑"><a href="#%E5%BC%80%E5%8F%91%E6%97%B6%E5%AE%B9%E6%98%93%E8%B8%A9%E7%9A%84%E5%9D%91" class="headerlink" title="开发时容易踩的坑"></a>开发时容易踩的坑</h1>
+<p>第一个坑是只关注 embedding 模型，忽略了文档清洗。脏数据、重复段落、标题丢失，会让检索结果很飘。第二个坑是 chunk 设计过于随意，导致召回片段缺上下文。第三个坑是 prompt 没约束好，模型拿不到资料时仍然硬答。</p>
+<p>我一般会在 prompt 里明确写：如果资料中没有答案，就回答不知道，并说明缺少什么资料。同时把引用片段 ID 保留下来，方便前端展示出处，也方便调试检索质量。</p>
+<h1 id="小结"><a href="#%E5%B0%8F%E7%BB%93" class="headerlink" title="小结"></a>小结</h1>
+<p>RAG 不是万能补丁，它更像一个工程化套路：把可变知识交给外部检索，把语言生成交给模型。一个好用的 RAG 系统，核心不是“接上向量数据库”这么简单，而是资料质量、召回质量、上下文组织和答案约束共同作用。</p>
+<p>参考资料：<a href="https://arxiv.org/abs/2005.11401" target="_blank" rel="noopener">Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks</a>。</p>]]></content>
+    <summary type="html">RAG 的核心是先从外部知识库检索相关资料，再让模型基于资料生成回答，从而提升事实性、时效性和可追溯性。</summary>
+    <category term="AI开发" scheme="https://aspirant02.github.io/categories/AI%E5%BC%80%E5%8F%91/"/>
+    <category term="AI开发" scheme="https://aspirant02.github.io/tags/AI%E5%BC%80%E5%8F%91/"/>
+  </entry>
+  <entry>
+    <title>AI开发-Agent：从聊天到执行任务</title>
+    <link href="https://aspirant02.github.io/2026/07/06/AI%E5%BC%80%E5%8F%91-Agent%EF%BC%9A%E4%BB%8E%E8%81%8A%E5%A4%A9%E5%88%B0%E6%89%A7%E8%A1%8C%E4%BB%BB%E5%8A%A1/"/>
+    <id>https://aspirant02.github.io/2026/07/06/AI%E5%BC%80%E5%8F%91-Agent%EF%BC%9A%E4%BB%8E%E8%81%8A%E5%A4%A9%E5%88%B0%E6%89%A7%E8%A1%8C%E4%BB%BB%E5%8A%A1/</id>
+    <published>2026-07-06T13:01:24.000Z</published>
+    <updated>2026-07-06T13:01:24.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="前言"><a href="#%E5%89%8D%E8%A8%80" class="headerlink" title="前言"></a>前言</h1>
+<p>Agent 这个词很容易被讲玄。我的理解很简单：普通聊天模型主要是在回答问题，而 Agent 需要围绕目标做计划、调用工具、观察结果，再继续下一步。它不是只说“应该怎么做”，而是尽量真的把事情往前推进。</p>
+<p>例如“帮我分析这个仓库的启动方式并修一个报错”，一个 Agent 可能会先列目录、读 README、运行测试、定位错误、改代码、再次验证。这里的关键不是模型说得多聪明，而是它能在环境里行动。</p>
+<h1 id="Agent 的基本循环"><a href="#Agent%20%E7%9A%84%E5%9F%BA%E6%9C%AC%E5%BE%AA%E7%8E%AF" class="headerlink" title="Agent 的基本循环"></a>Agent 的基本循环</h1>
+<p>一个常见循环是 Plan、Act、Observe、Reflect。先根据目标制定下一步，然后调用工具执行，接着读取工具返回的结果，再决定是否继续。ReAct 论文里提出把 reasoning traces 和 actions 交织起来，让模型边推理边行动，这个思路后来影响了很多 Agent 框架。</p>
+<p>这个循环看着简单，工程上却很考验边界。工具调用失败怎么办？执行结果太长怎么办？模型连续走偏怎么办？这些都需要框架层处理，而不能只靠一句“你要认真思考”。</p>
+<h1 id="工具设计比模型更重要"><a href="#%E5%B7%A5%E5%85%B7%E8%AE%BE%E8%AE%A1%E6%AF%94%E6%A8%A1%E5%9E%8B%E6%9B%B4%E9%87%8D%E8%A6%81" class="headerlink" title="工具设计比模型更重要"></a>工具设计比模型更重要</h1>
+<p>Agent 的能力很大程度取决于工具。工具命名要清楚，入参要结构化，输出要可读，权限要收紧。比如 delete_file 这种工具一定要谨慎，最好先做 dry-run 或要求二次确认。</p>
+<p>我更倾向先给 Agent 提供只读工具和低风险操作：搜索代码、读取文件、运行测试、查询日志。等观察链路稳定后，再逐步开放写入和部署动作。</p>
+<h1 id="如何判断一个 Agent 靠谱"><a href="#%E5%A6%82%E4%BD%95%E5%88%A4%E6%96%AD%E4%B8%80%E4%B8%AA%20Agent%20%E9%9D%A0%E8%B0%B1" class="headerlink" title="如何判断一个 Agent 靠谱"></a>如何判断一个 Agent 靠谱</h1>
+<p>不能只看它回答像不像人，而要看它能不能稳定完成任务。可以准备一组固定任务：查资料、改一个小 bug、生成一份报告、根据日志定位异常。每个任务都要有明确的成功标准。</p>
+<p>另外要保留轨迹日志。Agent 每一步为什么调用这个工具、拿到了什么观察结果、基于什么继续下一步，都应该能追溯。没有轨迹的 Agent 很难调试，也很难让用户信任。</p>
+<h1 id="小结"><a href="#%E5%B0%8F%E7%BB%93" class="headerlink" title="小结"></a>小结</h1>
+<p>Agent 是把模型能力和工具执行结合起来的工程系统。它的难点不只是 prompt，而是工具边界、任务拆解、记忆管理、失败恢复和验证闭环。独立开发者做 Agent，最好从一个窄场景开始，比如“自动整理 issue”或“代码仓库问答+小修复”，不要一上来就做全能助手。</p>
+<p>参考资料：<a href="https://arxiv.org/abs/2210.03629" target="_blank" rel="noopener">ReAct: Synergizing Reasoning and Acting in Language Models</a>。</p>]]></content>
+    <summary type="html">Agent 不只是会聊天的模型，而是能围绕目标做计划、调用工具、观察结果并持续推进任务的工程系统。</summary>
+    <category term="AI开发" scheme="https://aspirant02.github.io/categories/AI%E5%BC%80%E5%8F%91/"/>
+    <category term="AI开发" scheme="https://aspirant02.github.io/tags/AI%E5%BC%80%E5%8F%91/"/>
+  </entry>
+  <entry>
+    <title>AI开发-Harness：用 lm-evaluation-harness 评测模型</title>
+    <link href="https://aspirant02.github.io/2026/07/23/AI%E5%BC%80%E5%8F%91-Harness%EF%BC%9A%E7%94%A8lm-evaluation-harness%E8%AF%84%E6%B5%8B%E6%A8%A1%E5%9E%8B/"/>
+    <id>https://aspirant02.github.io/2026/07/23/AI%E5%BC%80%E5%8F%91-Harness%EF%BC%9A%E7%94%A8lm-evaluation-harness%E8%AF%84%E6%B5%8B%E6%A8%A1%E5%9E%8B/</id>
+    <published>2026-07-23T13:01:24.000Z</published>
+    <updated>2026-07-23T13:01:24.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="前言"><a href="#%E5%89%8D%E8%A8%80" class="headerlink" title="前言"></a>前言</h1>
+<p>模型评测很容易被“感觉”带偏。今天觉得 A 模型回答更自然，明天又觉得 B 模型代码更稳，如果没有固定数据集和指标，最后很难做决策。Harness 这里我主要指 EleutherAI 的 lm-evaluation-harness，它是一个常用的语言模型评测框架。</p>
+<p>它的目标是用统一方式在大量任务上测试生成式语言模型。官方 README 里提到，它支持许多标准学术 benchmark，也支持本地模型、API 模型、自定义 prompt 和评测指标。</p>
+<h1 id="它适合解决什么问题"><a href="#%E5%AE%83%E9%80%82%E5%90%88%E8%A7%A3%E5%86%B3%E4%BB%80%E4%B9%88%E9%97%AE%E9%A2%98" class="headerlink" title="它适合解决什么问题"></a>它适合解决什么问题</h1>
+<p>如果你在选模型，比如同一个任务到底用 Qwen、Llama、DeepSeek 还是某个微调模型，单纯看排行榜不一定够。排行榜任务和你的业务任务可能不一致，推理框架、量化方式、prompt 格式也会影响结果。</p>
+<p>lm-evaluation-harness 的价值在于把评测流程标准化。你可以固定任务、样本、few-shot 设置和模型参数，让多个模型在同一套规则下比较。</p>
+<h1 id="一个最小使用流程"><a href="#%E4%B8%80%E4%B8%AA%E6%9C%80%E5%B0%8F%E4%BD%BF%E7%94%A8%E6%B5%81%E7%A8%8B" class="headerlink" title="一个最小使用流程"></a>一个最小使用流程</h1>
+<p>安装后可以先列出任务，再选择一个轻量任务跑通。比如用 Hugging Face 后端评测 hellaswag，命令大致是：<code>lm_eval --model hf --model_args pretrained=xxx --tasks hellaswag --device cuda:0 --batch_size 8</code>。</p>
+<p>真正用于项目时，我会把命令写成脚本，并把模型版本、数据集版本、commit hash、推理参数一起记录下来。否则过两周再跑一次，结果变了也不知道是哪一层变了。</p>
+<h1 id="自定义任务更有价值"><a href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E4%BB%BB%E5%8A%A1%E6%9B%B4%E6%9C%89%E4%BB%B7%E5%80%BC" class="headerlink" title="自定义任务更有价值"></a>自定义任务更有价值</h1>
+<p>通用 benchmark 能提供基础参考，但业务模型最该看业务数据。比如客服场景可以抽一批真实问答做准确率和拒答率评测；代码场景可以设计单测通过率；RAG 场景可以评估引用命中率和答案忠实度。</p>
+<p>自定义任务的关键是把“好答案”的标准写清楚。能自动评估就自动评估，不能自动评估也要设计人工打分表，而不是只让人凭感觉看几条样例。</p>
+<h1 id="小结"><a href="#%E5%B0%8F%E7%BB%93" class="headerlink" title="小结"></a>小结</h1>
+<p>Harness 的意义是让模型选择从主观体验回到可重复实验。对于独立开发者来说，不一定要追求完整评测平台，但至少应该有一组固定命令和固定样本，能在换模型、换 prompt、换推理框架时快速比较。</p>
+<p>参考资料：<a href="https://github.com/EleutherAI/lm-evaluation-harness" target="_blank" rel="noopener">EleutherAI/lm-evaluation-harness</a>。</p>]]></content>
+    <summary type="html">lm-evaluation-harness 可以把模型评测流程标准化，让多个模型在同一套任务、参数和指标下比较。</summary>
+    <category term="AI开发" scheme="https://aspirant02.github.io/categories/AI%E5%BC%80%E5%8F%91/"/>
+    <category term="AI开发" scheme="https://aspirant02.github.io/tags/AI%E5%BC%80%E5%8F%91/"/>
+  </entry>
+  <entry>
+    <title>AI开发-Hermes：一个偏工具调用和结构化输出的模型系列</title>
+    <link href="https://aspirant02.github.io/2026/08/08/AI%E5%BC%80%E5%8F%91-Hermes%EF%BC%9A%E4%B8%80%E4%B8%AA%E5%81%8F%E5%B7%A5%E5%85%B7%E8%B0%83%E7%94%A8%E5%92%8C%E7%BB%93%E6%9E%84%E5%8C%96%E8%BE%93%E5%87%BA%E7%9A%84%E6%A8%A1%E5%9E%8B%E7%B3%BB%E5%88%97/"/>
+    <id>https://aspirant02.github.io/2026/08/08/AI%E5%BC%80%E5%8F%91-Hermes%EF%BC%9A%E4%B8%80%E4%B8%AA%E5%81%8F%E5%B7%A5%E5%85%B7%E8%B0%83%E7%94%A8%E5%92%8C%E7%BB%93%E6%9E%84%E5%8C%96%E8%BE%93%E5%87%BA%E7%9A%84%E6%A8%A1%E5%9E%8B%E7%B3%BB%E5%88%97/</id>
+    <published>2026-08-08T13:01:24.000Z</published>
+    <updated>2026-08-08T13:01:24.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="前言"><a href="#%E5%89%8D%E8%A8%80" class="headerlink" title="前言"></a>前言</h1>
+<p>Hermes 是 Nous Research 推出的模型系列。这里以 Hermes 3 为例，它不是单纯追求聊天口感，而是比较强调 agentic capabilities、function calling、structured output、多轮对话和代码能力。对于 AI 应用开发来说，这类能力往往比“闲聊是否漂亮”更关键。</p>
+<p>比如做一个工具型助手，模型需要稳定输出 JSON、按函数签名组织参数、理解 system prompt 里的角色约束。如果这些能力不稳，后端就会花很多精力做兜底解析。</p>
+<h1 id="Hermes 3 的定位"><a href="#Hermes%203%20%E7%9A%84%E5%AE%9A%E4%BD%8D" class="headerlink" title="Hermes 3 的定位"></a>Hermes 3 的定位</h1>
+<p>Hugging Face 模型卡里提到，Hermes 3 是 Nous Research Hermes 系列的最新版本，相比 Hermes 2，在 Agent 能力、角色扮演、推理、多轮对话、长上下文一致性等方面都有改进。Hermes 3 也继续强化了函数调用和结构化输出能力。</p>
+<p>这说明它更适合被当作应用组件，而不只是一个聊天 Demo。你可以把它放在需要工具调用、JSON 输出、复杂系统提示词的场景里试一试。</p>
+<h1 id="Prompt 格式要尊重模型习惯"><a href="#Prompt%20%E6%A0%BC%E5%BC%8F%E8%A6%81%E5%B0%8A%E9%87%8D%E6%A8%A1%E5%9E%8B%E4%B9%A0%E6%83%AF" class="headerlink" title="Prompt 格式要尊重模型习惯"></a>Prompt 格式要尊重模型习惯</h1>
+<p>Hermes 3 使用 ChatML 风格的 prompt format。很多模型都有自己的模板，如果调用时忽略模板，效果会明显下降。使用 transformers 时，应尽量通过 tokenizer 的 chat template 组织 messages，而不是手拼字符串。</p>
+<p>函数调用也一样。模型卡给出的示例是把工具签名放到 system role，并要求模型用特定结构返回工具调用。开发时要让解析器和 prompt 格式保持一致。</p>
+<h1 id="本地部署怎么选"><a href="#%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2%E6%80%8E%E4%B9%88%E9%80%89" class="headerlink" title="本地部署怎么选"></a>本地部署怎么选</h1>
+<p>70B 级别模型对显存要求比较高，不适合普通笔记本直接跑全精度。模型卡给了 vLLM、SGLang、Docker Model Runner 等使用方式，也提供量化版本入口。</p>
+<p>如果只是学习函数调用流程，可以先用小尺寸或量化模型验证 prompt、解析器和工具执行链路。等链路稳定，再换更大的模型做效果评估。</p>
+<h1 id="小结"><a href="#%E5%B0%8F%E7%BB%93" class="headerlink" title="小结"></a>小结</h1>
+<p>Hermes 这类模型提醒我们：AI 应用不只看模型会不会聊天，还要看它能不能稳定遵守格式、调用工具、处理多轮上下文。做 Agent 或自动化工具时，结构化输出和函数调用经常是第一优先级。</p>
+<p>参考资料：<a href="https://huggingface.co/NousResearch/Hermes-3-Llama-3.1-70B" target="_blank" rel="noopener">NousResearch/Hermes-3-Llama-3.1-70B 模型卡</a>。</p>]]></content>
+    <summary type="html">Hermes 系列比较强调函数调用、结构化输出、多轮对话和 Agent 能力，适合放在工具型 AI 应用里评估。</summary>
+    <category term="AI开发" scheme="https://aspirant02.github.io/categories/AI%E5%BC%80%E5%8F%91/"/>
+    <category term="AI开发" scheme="https://aspirant02.github.io/tags/AI%E5%BC%80%E5%8F%91/"/>
+  </entry>
+<entry>
     <title>八股文系列-并发编程</title>
     <link href="https://aspirant02.github.io/2026/08/02/%E5%85%AB%E8%82%A1%E6%96%87%E7%B3%BB%E5%88%97-%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/"/>
     <id>https://aspirant02.github.io/2026/08/02/%E5%85%AB%E8%82%A1%E6%96%87%E7%B3%BB%E5%88%97-%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/</id>
