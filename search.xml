@@ -235,137 +235,263 @@ def run_agent(goal):
       <tags><tag> AI开发 </tag></tags>
     </entry>
     <entry>
-      <title>AI开发-Harness：用 lm-evaluation-harness 评测模型</title>
+      <title>AI开发-Harness：驾驭大模型的 Agent 挽具</title>
       <link href="/2026/07/23/AI%E5%BC%80%E5%8F%91-Harness%EF%BC%9A%E7%94%A8lm-evaluation-harness%E8%AF%84%E6%B5%8B%E6%A8%A1%E5%9E%8B/"/>
       <url>/2026/07/23/AI%E5%BC%80%E5%8F%91-Harness%EF%BC%9A%E7%94%A8lm-evaluation-harness%E8%AF%84%E6%B5%8B%E6%A8%A1%E5%9E%8B/</url>
-      <content type="html"><![CDATA[<h1 id="前言"><a href="#%E5%89%8D%E8%A8%80" class="headerlink" title="前言"></a>前言</h1>
-<p>模型评测很容易被“感觉”带偏。今天觉得 A 模型回答更自然，明天又觉得 B 模型代码更稳，如果没有固定数据集和指标，最后很难做决策。Harness 这里我主要指 EleutherAI 的 lm-evaluation-harness，它是一个常用的语言模型评测框架。</p>
-<p>它的目标是用统一方式在大量任务上测试生成式语言模型。官方 README 里提到，它支持许多标准学术 benchmark，也支持本地模型、API 模型、自定义 prompt 和评测指标。</p>
-<h1 id="它适合解决什么问题"><a href="#%E5%AE%83%E9%80%82%E5%90%88%E8%A7%A3%E5%86%B3%E4%BB%80%E4%B9%88%E9%97%AE%E9%A2%98" class="headerlink" title="它适合解决什么问题"></a>它适合解决什么问题</h1>
-<p>如果你在选模型，比如同一个任务到底用 Qwen、Llama、DeepSeek 还是某个微调模型，单纯看排行榜不一定够。排行榜任务和你的业务任务可能不一致，推理框架、量化方式、prompt 格式也会影响结果。</p>
-<p>lm-evaluation-harness 的价值在于把评测流程标准化。你可以固定任务、样本、few-shot 设置和模型参数，让多个模型在同一套规则下比较。</p>
-<h1 id="一个最小使用流程"><a href="#%E4%B8%80%E4%B8%AA%E6%9C%80%E5%B0%8F%E4%BD%BF%E7%94%A8%E6%B5%81%E7%A8%8B" class="headerlink" title="一个最小使用流程"></a>一个最小使用流程</h1>
-<p>安装后可以先列出任务，再选择一个轻量任务跑通。比如用 Hugging Face 后端评测 hellaswag，命令大致是：<code>lm_eval --model hf --model_args pretrained=xxx --tasks hellaswag --device cuda:0 --batch_size 8</code>。</p>
-<p>真正用于项目时，我会把命令写成脚本，并把模型版本、数据集版本、commit hash、推理参数一起记录下来。否则过两周再跑一次，结果变了也不知道是哪一层变了。</p>
-<h1 id="自定义任务更有价值"><a href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E4%BB%BB%E5%8A%A1%E6%9B%B4%E6%9C%89%E4%BB%B7%E5%80%BC" class="headerlink" title="自定义任务更有价值"></a>自定义任务更有价值</h1>
-<p>通用 benchmark 能提供基础参考，但业务模型最该看业务数据。比如客服场景可以抽一批真实问答做准确率和拒答率评测；代码场景可以设计单测通过率；RAG 场景可以评估引用命中率和答案忠实度。</p>
-<p>自定义任务的关键是把“好答案”的标准写清楚。能自动评估就自动评估，不能自动评估也要设计人工打分表，而不是只让人凭感觉看几条样例。</p>
-<!-- ai-extra-expanded-2026 -->
-<h1 id="把命令写成可复现实验"><a href="#%E6%8A%8A%E5%91%BD%E4%BB%A4%E5%86%99%E6%88%90%E5%8F%AF%E5%A4%8D%E7%8E%B0%E5%AE%9E%E9%AA%8C" class="headerlink" title="把命令写成可复现实验"></a>把命令写成可复现实验</h1>
-<p>我一般会把每次评测写成配置文件或脚本，而不是在命令行里临时敲。原因很简单：评测结果需要复盘，临时命令很容易漏参数。尤其是模型路径、revision、tokenizer、dtype、量化配置，这些都会影响结果。</p>
-<pre><code class="bash">pip install lm-eval
+      <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1>
+<p>这里说的 Harness，不是某个模型评测框架。它更接近英文里“挽具”的本意：把一个力量很大的东西套住，让它能够被驾驭、被导向、被限制，而不是到处乱冲。放到 Agent 语境里，Harness 就是一套用来驾驭大模型的工程结构。</p>
+<p>大模型本身像一股很强的推理和生成能力，但它没有天然的边界感。它可能把任务做偏，也可能调用不该调用的工具，还可能在没有证据时编造结论。Harness 的作用不是削弱模型，而是把模型放进一个可执行、可观察、可回滚的轨道里。</p>
+<p>如果说 Agent 是“能行动的模型系统”，那 Harness 就是让这个行动系统稳定工作的挽具。它规定任务入口是什么，模型能看到什么上下文，可以调用哪些工具，每一步如何记录，什么时候停止，怎么验证结果，以及失败后如何恢复。</p>
+<h1 id="为什么 Agent 需要 Harness"><a href="#为什么 Agent 需要 Harness" class="headerlink" title="为什么 Agent 需要 Harness"></a>为什么 Agent 需要 Harness</h1>
+<p>很多 Agent Demo 看起来很聪明，但一接近真实任务就容易失控。原因通常不是模型太差，而是系统没有 Harness。用户说“帮我修一下这个问题”，模型拿到一句模糊目标，就开始读文件、改代码、运行命令。中间没有预算、没有权限边界、没有状态记录、没有验收标准，最后结果只能靠感觉判断。</p>
+<p>Harness 要解决的正是这些问题。它把自然语言目标变成任务契约，把工具调用放进权限闸门，把长任务拆成状态机，把每一步观察写入 trace，把最终结果交给验证器。模型仍然负责理解、计划和生成，但它不再裸奔。</p>
+<p>一个没有 Harness 的 Agent 像是在直接拉一辆车；一个有 Harness 的 Agent 则像是有缰绳、车辕、刹车和仪表盘。力量还是同一个力量，但可控性完全不同。</p>
+<h1 id="Harness 的组成"><a href="#Harness 的组成" class="headerlink" title="Harness 的组成"></a>Harness 的组成</h1>
+<p>我会把 Agent Harness 拆成七个部分：</p>
+<ul>
+<li>Task Contract：任务契约，定义目标、输入、输出、验收标准和禁止事项。</li>
+<li>Context Builder：上下文装配器，只把当前步骤需要的信息交给模型。</li>
+<li>Planner：计划器，把目标拆成可执行步骤。</li>
+<li>Tool Gate：工具闸门，决定某个工具调用是否允许执行。</li>
+<li>Executor：执行器，真正调用文件、网络、数据库、浏览器等外部能力。</li>
+<li>Observer：观察器，把工具结果压缩成模型可读的反馈。</li>
+<li>Verifier：验证器，用测试、规则、截图、人工检查等方式判断任务是否完成。</li>
+</ul>
+<p>这七个部分不一定都要做得很重，但概念上最好分开。否则所有逻辑都塞进一个大 prompt，后面一定难调。</p>
+<h1 id="任务契约"><a href="#任务契约" class="headerlink" title="任务契约"></a>任务契约</h1>
+<p>Harness 的第一步是把用户目标变成任务契约。契约不是为了增加形式感，而是为了让 Agent 知道什么叫完成，什么叫越界。</p>
+<pre><code class="language-yaml">task_id: fix-category-page
+objective: 修复分类和标签页面的展示问题
+inputs:
+  - screenshots
+  - repo_path
+allowed_actions:
+  - read_file
+  - search_text
+  - edit_static_html
+  - run_git_diff_check
+  - push_to_remote
+forbidden_actions:
+  - delete_repository
+  - reset_unrelated_changes
+acceptance:
+  - AI开发分类页标题不再出现“分类:”前缀
+  - 分类页不再显示个人信息侧栏
+  - 标签页采用同样规则
+  - 修改必须提交并推送</code></pre>
+<p>有了契约，模型就不只是“尽量帮忙”，而是在一组边界里工作。后续每一次工具调用，都可以拿契约做判断：这个动作是否被允许，是否和目标相关，是否需要用户确认。</p>
+<h1 id="工具闸门"><a href="#工具闸门" class="headerlink" title="工具闸门"></a>工具闸门</h1>
+<p>Agent 最容易出事的地方是工具调用。读文件通常风险较低，写文件风险更高，删除、部署、支付、发邮件则需要更严格的确认。Harness 要把工具分级，而不是把所有工具都裸露给模型。</p>
+<p>下面是一个极简工具闸门示例：</p>
+<pre><code class="language-python">class ToolGate:
+    def __init__(self, contract):
+        self.contract = contract
 
-lm_eval \
-  --model hf \
-  --model_args pretrained=Qwen/Qwen2.5-0.5B-Instruct,dtype=bfloat16 \
-  --tasks hellaswag,arc_easy \
-  --device cuda:0 \
-  --batch_size 8 \
-  --output_path results/qwen2_5_0_5b.json</code></pre>
-<p>哪怕只是个人项目，也建议把命令保存下来。模型评测不是只要一个数字，更重要的是数字背后的条件。没有条件，数字很容易误导人。</p>
-<h1 id="自定义任务怎么起步"><a href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E4%BB%BB%E5%8A%A1%E6%80%8E%E4%B9%88%E8%B5%B7%E6%AD%A5" class="headerlink" title="自定义任务怎么起步"></a>自定义任务怎么起步</h1>
-<p>自定义任务不用一开始就很复杂。可以先准备几十条样本，字段包括问题、标准答案、候选选项、参考文档 ID。关键是这些样本要来自真实场景，而不是为了让模型好看而临时编出来。</p>
-<pre><code class="yaml">dataset:
-  - id: case_001
-    question: "Gitalk 初始化失败时，应该先检查哪项配置？"
-    choices:
-      - "clientID 和 clientSecret 是否正确"
-      - "页面背景图片是否存在"
-      - "文章字数统计是否开启"
-      - "浏览器是否打开暗色模式"
-    answer: 0
-  - id: case_002
-    question: "RAG 系统资料不足时，模型应该怎么回答？"
-    choices:
-      - "根据常识补全答案"
-      - "直接说不知道，并说明缺少资料"
-      - "忽略引用片段"
-      - "随机选择最像的答案"
-    answer: 1</code></pre>
-<p>这种选择题形式不一定覆盖所有能力，但很适合做回归测试。比如你换了一个更便宜的模型，先跑一遍业务小样本，如果基础问题都掉得很厉害，就不用急着上线。</p>
-<h1 id="结果怎么看"><a href="#%E7%BB%93%E6%9E%9C%E6%80%8E%E4%B9%88%E7%9C%8B" class="headerlink" title="结果怎么看"></a>结果怎么看</h1>
-<p>不要只盯一个总分，要看任务类型和样本分布。某个模型在常识题上高，不代表它在企业文档问答上也好；某个模型英文 benchmark 强，也不代表中文业务稳。</p>
-<pre><code class="md">| model | task | acc | latency | cost note |
-| --- | --- | ---: | ---: | --- |
-| qwen-0.5b | custom_qa | 0.71 | low | cheap baseline |
-| qwen-7b | custom_qa | 0.83 | medium | better accuracy |
-| llama-8b | custom_qa | 0.80 | medium | weaker Chinese cases |</code></pre>
-<p>线上选型还要看成本和延迟。一个分数高 1% 但成本高 3 倍的模型，不一定值得换。评测的目标不是得到漂亮数字，而是帮助做工程决策。</p>
-<h1 id="小结"><a href="#%E5%B0%8F%E7%BB%93" class="headerlink" title="小结"></a>小结</h1>
-<p>Harness 的意义是让模型选择从主观体验回到可重复实验。对于独立开发者来说，不一定要追求完整评测平台，但至少应该有一组固定命令和固定样本，能在换模型、换 prompt、换推理框架时快速比较。</p>
-<p>参考资料：<a href="https://github.com/EleutherAI/lm-evaluation-harness" target="_blank" rel="noopener">EleutherAI/lm-evaluation-harness</a>。</p>]]></content>
+    def allow(self, tool_name, args):
+        if tool_name not in self.contract["allowed_actions"]:
+            return False, "tool is not allowed by task contract"
+
+        if tool_name.startswith("delete_"):
+            return False, "destructive action requires human approval"
+
+        if tool_name == "edit_static_html":
+            path = args.get("path", "")
+            if not path.endswith("index.html"):
+                return False, "this task only allows editing generated html pages"
+
+        return True, "ok"</code></pre>
+<p>这段代码很简单，但思想重要：模型提出 action，Harness 决定 action 是否能落地。模型负责想，Harness 负责管。</p>
+<h1 id="执行循环"><a href="#执行循环" class="headerlink" title="执行循环"></a>执行循环</h1>
+<p>一个 Harness 驱动的 Agent 循环通常不是“模型一次性回答完”，而是多轮推进。每一轮包含：构造上下文、让模型选择下一步、通过工具闸门、执行工具、观察结果、记录 trace、判断是否完成。</p>
+<pre><code class="language-python">class AgentHarness:
+    def __init__(self, model, tools, verifier, max_steps=12):
+        self.model = model
+        self.tools = tools
+        self.verifier = verifier
+        self.max_steps = max_steps
+        self.trace = []
+
+    def run(self, contract):
+        state = {"contract": contract, "observations": []}
+        gate = ToolGate(contract)
+
+        for step in range(self.max_steps):
+            action = self.model.next_action(state)
+            allowed, reason = gate.allow(action.name, action.args)
+
+            if not allowed:
+                self.trace.append({"step": step, "blocked": action.name, "reason": reason})
+                state["observations"].append(f"blocked: {reason}")
+                continue
+
+            result = self.tools[action.name](**action.args)
+            self.trace.append({"step": step, "action": action.name, "result": result.summary})
+            state["observations"].append(result.summary)
+
+            if self.verifier.passed(state):
+                return {"status": "done", "trace": self.trace}
+
+        return {"status": "need_review", "trace": self.trace}</code></pre>
+<p>这里最关键的是 max_steps 和 verifier。没有步数上限，Agent 可能陷入循环；没有验证器，Agent 会把“我觉得完成了”当成完成。Harness 要求系统用外部证据收尾，比如测试通过、页面检查通过、接口返回正确、用户确认通过。</p>
+<h1 id="上下文装配"><a href="#上下文装配" class="headerlink" title="上下文装配"></a>上下文装配</h1>
+<p>很多人做 Agent 时喜欢把所有信息塞进上下文：用户需求、历史对话、全部文件、全部工具说明、全部规则。这样模型看起来知道得很多，但实际更容易混乱。Harness 里的 Context Builder 应该按步骤装配上下文。</p>
+<p>比如当前步骤是“判断分类页为什么显示错标题”，上下文只需要相关 HTML 片段、页面路径、用户截图里的现象、已知约束。它不需要整个仓库，也不需要所有历史任务。上下文越干净，模型越容易做出稳定决策。</p>
+<p>一个实用做法是把上下文分成四层：任务契约永远保留，最近观察保留，相关文件片段按检索加入，长期记忆只在命中时加入。这样 Harness 像一个过滤器，决定模型此刻应该看什么。</p>
+<h1 id="验证器"><a href="#验证器" class="headerlink" title="验证器"></a>验证器</h1>
+<p>Verifier 是 Harness 的刹车和仪表盘。它不是为了否定模型，而是为了告诉系统“这一步是否真的有效”。不同任务需要不同验证器。</p>
+<ul>
+<li>代码任务：单元测试、构建、lint、类型检查。</li>
+<li>前端任务：截图对比、DOM 查询、响应式检查。</li>
+<li>数据任务：行数、schema、统计分布、异常值检查。</li>
+<li>文档任务：标题、链接、摘要、关键词和格式检查。</li>
+<li>自动化任务：dry-run、审计日志、幂等性检查。</li>
+</ul>
+<p>如果没有验证器，Agent 很容易停在“看起来对了”。Harness 要让“看起来”变成“证据显示”。例如页面侧栏问题，不应该只凭肉眼说修好了，而应该查询主内容里是否还有 aside-content、检查页面是否启用了 hide-aside、再线上请求确认部署结果。</p>
+<h1 id="Harness 和 Skill"><a href="#Harness 和 Skill" class="headerlink" title="Harness 和 Skill"></a>Harness 和 Skill</h1>
+<p>Harness 和 Hermes 里的 Skill 是互补关系。Skill 告诉 Agent “类似任务通常怎么做”，Harness 则告诉 Agent “这次任务允许怎么做、做到什么程度、如何验证”。一个偏经验，一个偏约束。</p>
+<p>没有 Skill，Agent 每次都要从零规划，效率低；没有 Harness，Agent 拿到 Skill 也可能用错地方。比如一个 Skill 建议“批量替换 HTML 标题”，Harness 需要检查这个批量替换是否只作用在目标页面，是否会改坏其它分类，是否需要同步搜索索引和订阅文件。</p>
+<p>所以比较理想的 Agent 架构是：Harness 管住任务生命周期，Skill 提供可复用方法。模型在两者之间做推理和选择。</p>
+<h1 id="落地建议"><a href="#落地建议" class="headerlink" title="落地建议"></a>落地建议</h1>
+<p>如果要从零实现一个 Harness，不建议一开始就做成大平台。可以先做一个窄场景，例如“静态站点维护 Agent”或“仓库测试修复 Agent”。先定义任务契约，再接入少量工具，然后加上 trace 和验证器。</p>
+<p>第一版只需要做到：每一步 action 都有记录，每个工具调用都有权限检查，每个任务结束都有验收项。等这个闭环稳定后，再加入自动规划、上下文检索、Skill 召回和长期记忆。</p>
+<p>Harness 的价值不是让 Agent 显得复杂，而是让它可靠。一个能被追踪、能被限制、能被验证的 Agent，才适合真正接入工作流。</p>
+<h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1>
+<p>Harness 是驾驭大模型的挽具。它用任务契约定义目标和边界，用上下文装配器控制模型看到什么，用工具闸门限制模型能做什么，用执行器和观察器推进任务，用验证器判断结果是否可信。</p>
+<p>做 Agent 时，prompt 很重要，但 prompt 不是全部。真正让 Agent 从 Demo 走向可用的，是 Harness 这种工程结构。它让模型的能力不再是散开的冲劲，而是被导向一个可控、可复盘、可持续改进的执行系统。</p>]]></content>
       <categories><category> AI开发 </category></categories>
       <tags><tag> AI开发 </tag></tags>
     </entry>
     <entry>
-      <title>AI开发-Hermes：一个偏工具调用和结构化输出的模型系列</title>
+      <title>AI开发-Hermes：会让 Skill 迭代进化的 Agent</title>
       <link href="/2026/08/08/AI%E5%BC%80%E5%8F%91-Hermes%EF%BC%9A%E4%B8%80%E4%B8%AA%E5%81%8F%E5%B7%A5%E5%85%B7%E8%B0%83%E7%94%A8%E5%92%8C%E7%BB%93%E6%9E%84%E5%8C%96%E8%BE%93%E5%87%BA%E7%9A%84%E6%A8%A1%E5%9E%8B%E7%B3%BB%E5%88%97/"/>
       <url>/2026/08/08/AI%E5%BC%80%E5%8F%91-Hermes%EF%BC%9A%E4%B8%80%E4%B8%AA%E5%81%8F%E5%B7%A5%E5%85%B7%E8%B0%83%E7%94%A8%E5%92%8C%E7%BB%93%E6%9E%84%E5%8C%96%E8%BE%93%E5%87%BA%E7%9A%84%E6%A8%A1%E5%9E%8B%E7%B3%BB%E5%88%97/</url>
-      <content type="html"><![CDATA[<h1 id="前言"><a href="#%E5%89%8D%E8%A8%80" class="headerlink" title="前言"></a>前言</h1>
-<p>Hermes 是 Nous Research 推出的模型系列。这里以 Hermes 3 为例，它不是单纯追求聊天口感，而是比较强调 agentic capabilities、function calling、structured output、多轮对话和代码能力。对于 AI 应用开发来说，这类能力往往比“闲聊是否漂亮”更关键。</p>
-<p>比如做一个工具型助手，模型需要稳定输出 JSON、按函数签名组织参数、理解 system prompt 里的角色约束。如果这些能力不稳，后端就会花很多精力做兜底解析。</p>
-<h1 id="Hermes 3 的定位"><a href="#Hermes%203%20%E7%9A%84%E5%AE%9A%E4%BD%8D" class="headerlink" title="Hermes 3 的定位"></a>Hermes 3 的定位</h1>
-<p>Hugging Face 模型卡里提到，Hermes 3 是 Nous Research Hermes 系列的最新版本，相比 Hermes 2，在 Agent 能力、角色扮演、推理、多轮对话、长上下文一致性等方面都有改进。Hermes 3 也继续强化了函数调用和结构化输出能力。</p>
-<p>这说明它更适合被当作应用组件，而不只是一个聊天 Demo。你可以把它放在需要工具调用、JSON 输出、复杂系统提示词的场景里试一试。</p>
-<h1 id="Prompt 格式要尊重模型习惯"><a href="#Prompt%20%E6%A0%BC%E5%BC%8F%E8%A6%81%E5%B0%8A%E9%87%8D%E6%A8%A1%E5%9E%8B%E4%B9%A0%E6%83%AF" class="headerlink" title="Prompt 格式要尊重模型习惯"></a>Prompt 格式要尊重模型习惯</h1>
-<p>Hermes 3 使用 ChatML 风格的 prompt format。很多模型都有自己的模板，如果调用时忽略模板，效果会明显下降。使用 transformers 时，应尽量通过 tokenizer 的 chat template 组织 messages，而不是手拼字符串。</p>
-<p>函数调用也一样。模型卡给出的示例是把工具签名放到 system role，并要求模型用特定结构返回工具调用。开发时要让解析器和 prompt 格式保持一致。</p>
-<h1 id="本地部署怎么选"><a href="#%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2%E6%80%8E%E4%B9%88%E9%80%89" class="headerlink" title="本地部署怎么选"></a>本地部署怎么选</h1>
-<p>70B 级别模型对显存要求比较高，不适合普通笔记本直接跑全精度。模型卡给了 vLLM、SGLang、Docker Model Runner 等使用方式，也提供量化版本入口。</p>
-<p>如果只是学习函数调用流程，可以先用小尺寸或量化模型验证 prompt、解析器和工具执行链路。等链路稳定，再换更大的模型做效果评估。</p>
-<!-- ai-extra-expanded-2026 -->
-<h1 id="结构化输出为什么重要"><a href="#%E7%BB%93%E6%9E%84%E5%8C%96%E8%BE%93%E5%87%BA%E4%B8%BA%E4%BB%80%E4%B9%88%E9%87%8D%E8%A6%81" class="headerlink" title="结构化输出为什么重要"></a>结构化输出为什么重要</h1>
-<p>做 AI 应用时，结构化输出是非常硬的需求。比如你要模型从用户输入里提取任务，后端要拿到 JSON 才能继续执行；你要模型生成工具参数，参数字段必须和 schema 对齐；你要模型做审核，最好输出明确的 label 和 reason。</p>
-<pre><code class="json">{
-  "task": "search_posts",
-  "arguments": {
-    "keyword": "RAG",
-    "limit": 5
-  },
-  "confidence": 0.86,
-  "need_user_confirm": false
+      <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1>
+<p>这篇文章重新说一下 Hermes。这里的 Hermes 不是某个偏函数调用的模型系列，也不是单纯的格式化能力。更准确地说，我想讨论的是一种 Agent：它不是只完成一次任务，而是会把一次任务中的有效做法沉淀成 Skill，再在后续任务里复用、校验、修正，最终让自己的工作方法慢慢变好。</p>
+<p>普通 Agent 的循环通常是计划、执行、观察、继续执行。Hermes 更进一步，它会关心“这次任务里有没有可复用的方法”。例如它修好了一个前端布局问题，不只是把这次代码改完，还会总结出一个 Skill：如何定位页面重叠、如何判断是 sticky 布局问题还是 z-index 问题、如何做截图验证、哪些改动容易影响其它页面。下一次遇到相似问题时，它不需要从零开始摸索，而是先调用这个 Skill。</p>
+<p>所以我理解的 Hermes 有两个关键词：一个是 Agent，另一个是 Skill Evolution。Agent 负责在环境里行动，Skill Evolution 负责把行动经验转成可复用的能力单元，并且允许这个能力单元继续被测试、被拆分、被合并、被淘汰。</p>
+<h1 id="Hermes 的定位"><a href="#Hermes 的定位" class="headerlink" title="Hermes 的定位"></a>Hermes 的定位</h1>
+<p>如果把 Agent 看成一个执行者，Hermes 更像一个会写工作手册、会更新工作手册、还会检查工作手册是否过期的执行者。它不是把所有知识都塞进 prompt，而是把稳定的经验变成一个个 Skill。Skill 可以是很小的，也可以是组合型的。</p>
+<p>一个小 Skill 可能只是“读取一个仓库时先找 package.json、README、配置文件，再判断启动方式”。一个组合型 Skill 可能是“修复静态博客页面错位”，里面包含定位页面、识别主题生成结构、修改 CSS 或 HTML、验证线上缓存等多个步骤。</p>
+<p>这和普通 memory 不太一样。memory 经常只是记录“用户喜欢什么”或“之前发生过什么”，而 Skill 更强调可执行。一个 Skill 应该能指导 Agent 下一次怎么做，最好还能被单独测试。它不是一句经验，而是一段可调用的方法。</p>
+<h1 id="Skill 是 Hermes 的能力单位"><a href="#Skill 是 Hermes 的能力单位" class="headerlink" title="Skill 是 Hermes 的能力单位"></a>Skill 是 Hermes 的能力单位</h1>
+<p>要让 Hermes 真正进化，Skill 不能只是自然语言笔记。比较实用的 Skill 至少应该包含这些字段：</p>
+<ul>
+<li>name：Skill 的名字，要求短、清楚、可检索。</li>
+<li>intent：这个 Skill 解决什么问题，不解决什么问题。</li>
+<li>trigger：什么样的任务或上下文适合调用它。</li>
+<li>inputs：调用时需要哪些信息，例如仓库路径、错误日志、截图、用户目标。</li>
+<li>procedure：具体步骤，可以是自然语言，也可以是工具调用模板。</li>
+<li>checks：完成后怎么验证。</li>
+<li>failure_cases：曾经失败过的场景，用来提醒 Agent 不要复读错误。</li>
+<li>version：Skill 的版本，方便回滚和对比。</li>
+</ul>
+<p>一个最小 Skill 可以长这样：</p>
+<pre><code class="language-json">{
+  "name": "fix_static_blog_sidebar_overlap",
+  "intent": "修复静态博客中侧栏卡片随滚动覆盖其它卡片的问题",
+  "trigger": ["sidebar overlap", "sticky layout", "archive card covers comments"],
+  "inputs": ["page_url", "screenshot", "repo_path"],
+  "procedure": [
+    "定位页面中 aside-content 和 sticky_layout 的结构",
+    "判断 sticky 是否在错误容器中生效",
+    "优先用局部 CSS 修正 position/top，不改全局主题布局",
+    "对归档、分类、标签等单栏页面检查是否需要移除侧栏 HTML",
+    "用本地和线上页面分别验证"
+  ],
+  "checks": [
+    "页面主内容没有 aside-content 残留",
+    "滚动后最新评论、归档、标签卡片不重叠",
+    "移动端菜单仍可正常打开"
+  ],
+  "failure_cases": [
+    "只用 display:none 隐藏侧栏，但 HTML 仍残留，用户会认为没有真正删除"
+  ],
+  "version": "1.2.0"
 }</code></pre>
-<p>自然语言适合给人读，结构化数据适合给系统用。很多应用失败，是因为中间层混用了两者：前端展示需要自然语言，后端执行却试图从自然语言里再解析参数。这样链路越长，错误越多。</p>
-<h1 id="函数调用的一个小例子"><a href="#%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E7%9A%84%E4%B8%80%E4%B8%AA%E5%B0%8F%E4%BE%8B%E5%AD%90" class="headerlink" title="函数调用的一个小例子"></a>函数调用的一个小例子</h1>
-<p>工具调用可以理解为让模型先选择函数，再填参数。真正执行函数的是你的程序，不是模型本身。下面用一个简化 schema 表达思路。</p>
-<pre><code class="ts">const tools = [
-  {
-    name: "search_posts",
-    description: "搜索博客文章",
-    parameters: {
-      type: "object",
-      properties: {
-        keyword: { type: "string" },
-        limit: { type: "number", default: 5 }
-      },
-      required: ["keyword"]
-    }
-  }
-];
+<p>这里面最重要的不是 JSON，而是 Skill 的边界。很多 Agent 失败，是因为它把“经验”写得太空。比如“检查页面布局”这种 Skill 基本没用，因为它既不知道什么时候用，也不知道怎么验证。Hermes 要进化，Skill 必须可触发、可执行、可验证。</p>
+<h1 id="从一次任务提炼 Skill"><a href="#从一次任务提炼 Skill" class="headerlink" title="从一次任务提炼 Skill"></a>从一次任务提炼 Skill</h1>
+<p>Hermes 的关键动作不是“执行任务”，而是“任务结束后复盘”。一次任务完成后，它可以把轨迹拆成三类内容：有效步骤、无效步骤、环境约束。有效步骤可能进入 Skill，失败步骤可能进入 failure_cases，环境约束则变成触发条件或注意事项。</p>
+<p>下面是一段简化的伪代码，展示如何从任务轨迹中生成候选 Skill。真实系统里，这一步可以由模型完成，但最好再经过规则和测试过滤。</p>
+<pre><code class="language-python">from dataclasses import dataclass, field
 
-// 用户：帮我找一下 RAG 相关文章
-// 模型期望输出：
-{
-  "tool": "search_posts",
-  "arguments": {
-    "keyword": "RAG",
-    "limit": 5
-  }
-}</code></pre>
-<p>这里最关键的是模型不要自己编造一个 find_blog 或 query_article，也不要把 limit 写成“多一点”。工具调用能力强的模型，会更愿意贴着 schema 走。对于 Agent 来说，这比回答风格更重要。</p>
-<h1 id="使用时要注意的边界"><a href="#%E4%BD%BF%E7%94%A8%E6%97%B6%E8%A6%81%E6%B3%A8%E6%84%8F%E7%9A%84%E8%BE%B9%E7%95%8C" class="headerlink" title="使用时要注意的边界"></a>使用时要注意的边界</h1>
-<p>结构化输出能力不代表可以完全不校验。后端仍然要用 JSON Schema、zod、pydantic 之类的工具做验证。模型输出不合法时，要能重试、降级或让用户确认。不要把模型当成类型系统。</p>
-<pre><code class="json">{
-  "error_type": "NullPointerException",
-  "file": "LoginService.java",
-  "line": 42,
-  "likely_reason": "user 对象为空但直接读取了 user.getId()",
-  "next_action": "检查查询用户为空时的分支处理"
-}</code></pre>
-<p>函数调用也不等于自动执行一切。危险工具仍然需要权限控制，比如删除文件、发送邮件、提交代码、部署服务。这些动作最好加 dry-run、二次确认和审计日志。模型负责建议调用，系统负责决定能不能调用。</p>
-<h1 id="小结"><a href="#%E5%B0%8F%E7%BB%93" class="headerlink" title="小结"></a>小结</h1>
-<p>Hermes 这类模型提醒我们：AI 应用不只看模型会不会聊天，还要看它能不能稳定遵守格式、调用工具、处理多轮上下文。做 Agent 或自动化工具时，结构化输出和函数调用经常是第一优先级。</p>
-<p>参考资料：<a href="https://huggingface.co/NousResearch/Hermes-3-Llama-3.1-70B" target="_blank" rel="noopener">NousResearch/Hermes-3-Llama-3.1-70B 模型卡</a>。</p>]]></content>
+@dataclass
+class TraceStep:
+    thought: str
+    action: str
+    observation: str
+    success: bool
+
+@dataclass
+class SkillDraft:
+    name: str
+    intent: str
+    trigger: list[str]
+    procedure: list[str]
+    checks: list[str]
+    failure_cases: list[str] = field(default_factory=list)
+
+
+def propose_skill(task_goal: str, trace: list[TraceStep]) -&gt; SkillDraft:
+    useful_steps = [s for s in trace if s.success]
+    failed_steps = [s for s in trace if not s.success]
+
+    return SkillDraft(
+        name="draft_from_task",
+        intent=f"复用解决任务的流程: {task_goal}",
+        trigger=[task_goal[:40]],
+        procedure=[f"执行 {s.action}，观察 {s.observation[:80]}" for s in useful_steps],
+        checks=["重新运行验证命令", "确认用户报告的问题已经消失"],
+        failure_cases=[f"避免重复: {s.action}" for s in failed_steps]
+    )</code></pre>
+<p>这个版本当然很粗糙，但它说明了 Hermes 的核心：任务不是一次性消耗品，任务轨迹是训练 Skill 的原料。Agent 做得越多，如果不沉淀，下一次还是从零开始；如果会沉淀，就会慢慢形成自己的工具箱。</p>
+<h1 id="Skill 的迭代闭环"><a href="#Skill 的迭代闭环" class="headerlink" title="Skill 的迭代闭环"></a>Skill 的迭代闭环</h1>
+<p>Skill 不能一写完就永久有效。代码库会变，工具会变，用户偏好会变，模型能力也会变。Hermes 需要一个迭代闭环：生成候选 Skill，选择是否启用，在任务中调用，记录成功率，失败后修订，长期无效就降权或删除。</p>
+<p>我更喜欢把 Skill 分成三个状态：</p>
+<ul>
+<li>draft：刚从任务中提炼出来，还没有被充分验证。</li>
+<li>active：多次任务验证有效，可以被自动检索和调用。</li>
+<li>deprecated：已经过期或效果不稳定，只保留历史记录。</li>
+</ul>
+<p>状态切换最好依赖数据，而不是只靠模型自信。比如同一个 Skill 最近 10 次调用中有 8 次成功，它可以保持 active；如果连续 3 次引导 Agent 走错方向，就应该降权。下面是一个很小的评分器：</p>
+<pre><code class="language-python">def update_skill_score(skill, run_result):
+    if run_result.passed_checks:
+        skill.score += 2
+    if run_result.required_human_fix:
+        skill.score -= 3
+    if run_result.caused_regression:
+        skill.score -= 6
+
+    if skill.score &gt;= 10:
+        skill.state = "active"
+    elif skill.score &lt;= -5:
+        skill.state = "deprecated"
+    else:
+        skill.state = "draft"
+
+    return skill</code></pre>
+<p>这里的分数不需要复杂，关键是让 Hermes 有“经验是否真的有效”的反馈。没有反馈的 Skill 进化，很容易变成越写越长的提示词垃圾堆。</p>
+<h1 id="Skill 检索与调用"><a href="#Skill 检索与调用" class="headerlink" title="Skill 检索与调用"></a>Skill 检索与调用</h1>
+<p>当用户给 Hermes 一个任务时，系统可以先做 Skill 检索。检索不只是看关键词，还要看触发条件、输入是否满足、风险等级是否匹配。例如“修复博客分类页显示异常”可以召回静态博客布局 Skill；但如果用户只是问“分类页是什么意思”，就不应该调用修复 Skill。</p>
+<p>一个可控的调用流程可以是：</p>
+<ol>
+<li>理解任务目标，抽取关键词和约束。</li>
+<li>从 Skill Registry 中召回候选 Skill。</li>
+<li>让模型判断 Skill 是否适用，并给出理由。</li>
+<li>只把最相关的 1 到 3 个 Skill 注入上下文。</li>
+<li>执行后记录 Skill 是否真的帮上忙。</li>
+</ol>
+<p>这里有一个细节：不要把所有 Skill 一次性塞给模型。Skill 太多会污染上下文，模型可能为了使用 Skill 而使用 Skill。Hermes 的 skill system 应该像一个工具箱，而不是一本永远展开的百科全书。</p>
+<h1 id="和普通 Agent 的区别"><a href="#和普通 Agent 的区别" class="headerlink" title="和普通 Agent 的区别"></a>和普通 Agent 的区别</h1>
+<p>普通 Agent 更关注“这次任务能不能完成”。Hermes 更关注“这次任务完成后，系统有没有变得更会做这类事”。这两者的工程重心不同。</p>
+<p>普通 Agent 需要计划器、工具调用、记忆和验证。Hermes 还需要 Skill Registry、Skill 版本管理、Skill 评分、回滚机制和去重机制。没有这些东西，所谓进化就只是把聊天记录存起来，下一次再翻出来看看。</p>
+<p>我觉得 Hermes 最适合那些重复但不完全相同的任务场景，例如代码库维护、自动化测试修复、文档整理、数据清洗、运营报表生成、静态站点发布。每一次任务都有差异，但底层套路可以复用，这正是 Skill 可以发挥价值的地方。</p>
+<h1 id="风险与边界"><a href="#风险与边界" class="headerlink" title="风险与边界"></a>风险与边界</h1>
+<p>让 Agent 自己进化听起来很诱人，但也有风险。第一，坏 Skill 会被反复调用，导致错误固化。第二，Skill 如果权限太大，可能把危险操作包装成“标准流程”。第三，Skill 太细会检索困难，太粗又会失去指导意义。</p>
+<p>比较稳的做法是把 Skill 进化分层：低风险 Skill 可以自动晋级，例如阅读项目结构、生成检查清单；高风险 Skill 必须人工确认，例如删除文件、修改数据库、部署生产环境。Skill 本身也应该能被 diff、review 和回滚。</p>
+<p>Hermes 不应该追求“完全自治”。更好的目标是让 Agent 在可追溯、可验证、可回滚的前提下，逐步沉淀自己的工作方法。这样的进化比较慢，但工程上更靠谱。</p>
+<h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1>
+<p>Hermes 的核心不是某个模型名字，而是一种会成长的 Agent 形态。它把任务轨迹提炼成 Skill，把 Skill 放进 Registry，在后续任务中检索和调用，再根据验证结果持续修订。这个过程让 Agent 不只是“完成一次任务”，而是逐渐形成自己的方法库。</p>
+<p>如果要实现一个最小 Hermes，我建议先做三件事：记录完整任务轨迹，允许任务结束后生成候选 Skill，为每个 Skill 设计可执行检查。等这三件事稳定，再考虑自动召回、自动评分和多 Skill 组合。Skill 进化不是魔法，它是工程化复盘、验证和版本管理的组合。</p>]]></content>
       <categories><category> AI开发 </category></categories>
       <tags><tag> AI开发 </tag></tags>
     </entry>

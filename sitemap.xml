@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
   <url>
@@ -29,16 +29,16 @@
     <loc>https://aspirant02.github.io/2026/07/23/AI%E5%BC%80%E5%8F%91-Harness%EF%BC%9A%E7%94%A8lm-evaluation-harness%E8%AF%84%E6%B5%8B%E6%A8%A1%E5%9E%8B/</loc>
     <lastmod>2026-07-23T13:01:24.000Z</lastmod>
     <date>1784811684000</date>
-    <title>AI开发-Harness：用 lm-evaluation-harness 评测模型 | Jeffrey</title>
-    <desc>lm-evaluation-harness 可以把模型评测流程标准化，让多个模型在同一套任务、参数和指标下比较。</desc>
+    <title>AI开发-Harness：驾驭大模型的 Agent 挽具 | Jeffrey</title>
+    <desc>Harness 是驾驭大模型和 Agent 的挽具，用任务契约、工具闸门、状态机和验证器把模型能力导向可控执行。</desc>
   </url>
 
   <url>
     <loc>https://aspirant02.github.io/2026/08/08/AI%E5%BC%80%E5%8F%91-Hermes%EF%BC%9A%E4%B8%80%E4%B8%AA%E5%81%8F%E5%B7%A5%E5%85%B7%E8%B0%83%E7%94%A8%E5%92%8C%E7%BB%93%E6%9E%84%E5%8C%96%E8%BE%93%E5%87%BA%E7%9A%84%E6%A8%A1%E5%9E%8B%E7%B3%BB%E5%88%97/</loc>
     <lastmod>2026-08-08T13:01:24.000Z</lastmod>
     <date>1786194084000</date>
-    <title>AI开发-Hermes：一个偏工具调用和结构化输出的模型系列 | Jeffrey</title>
-    <desc>Hermes 系列比较强调函数调用、结构化输出、多轮对话和 Agent 能力，适合放在工具型 AI 应用里评估。</desc>
+    <title>AI开发-Hermes：会让 Skill 迭代进化的 Agent | Jeffrey</title>
+    <desc>Hermes 是一种把任务经验沉淀为 Skill、再通过验证和反馈持续迭代 Skill 的 Agent 设计思路。</desc>
   </url>
 
 <url>
