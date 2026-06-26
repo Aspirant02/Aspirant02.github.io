@@ -81,3 +81,25 @@
   font-size: 0.9em !important;
   font-weight: 600 !important;
 }
+
+/* Keep sidebar cards in normal document flow.
+   The newest comments card is populated asynchronously; sticky positioning
+   can leave archive/category cards visually overlapping it after load. */
+.page #aside-content .sticky_layout {
+  position: static !important;
+  top: auto !important;
+}
+
+.layout.hide-aside > .aside-content,
+html.hide-aside .layout > .aside-content {
+  display: none !important;
+}
+
+.layout.hide-aside {
+  max-width: 1000px;
+  justify-content: center;
+}
+
+.layout.hide-aside > div:first-child {
+  width: 100% !important;
+}
