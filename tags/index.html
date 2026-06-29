@@ -289,6 +289,37 @@ document.addEventListener('pjax:send', () => {
     }).filter(item => item.content)
   }
 
+  const staticNewestComments = [
+    {
+      avatar: 'https://avatars.githubusercontent.com/u/119728376?v=4',
+      content: '欢迎大家前来留言~',
+      nick: 'Aspirant02',
+      url: '/about/',
+      date: '2026-06-23T18:00:48Z',
+      githubUrl: 'https://github.com/Aspirant02/Aspirant02.github.io/issues/4#issuecomment-4782038555'
+    },
+    {
+      avatar: 'https://avatars.githubusercontent.com/u/119728376?v=4',
+      content: 'SSM框架是大多人入门java都需要学习的框架。',
+      nick: 'Aspirant02',
+      url: '/2026/04/10/SpringBoot-%E7%99%BB%E5%BD%95%E6%A0%A1%E9%AA%8C%E6%8A%80%E6%9C%AF/',
+      date: '2026-06-23T18:00:12Z',
+      githubUrl: 'https://github.com/Aspirant02/Aspirant02.github.io/issues/3#issuecomment-4782034036'
+    }
+  ]
+
+  const readStaticNewestComments = () => staticNewestComments.map(item => ({ ...item }))
+
+  const newestCommentsApiCooldownKey = 'github-newest-comments-api-cooldown-until'
+
+  const coolDownNewestCommentsApi = () => {
+    saveToLocal.set(newestCommentsApiCooldownKey, String(Date.now() + 10 * 60 * 1000), 1)
+  }
+
+  const isNewestCommentsApiCoolingDown = () => {
+    const cooldownUntil = Number(saveToLocal.get(newestCommentsApiCooldownKey) || 0)
+    return Date.now() < cooldownUntil
+  }
   const findTrueUrl = (array) => {
     if (!Array.isArray(array) || array.length === 0) {
       return
@@ -334,7 +365,13 @@ document.addEventListener('pjax:send', () => {
     fetch('https://api.github.com/repos/Aspirant02/Aspirant02.github.io/issues/comments?sort=updated&direction=desc&per_page=6&page=1', {
       headers: getGithubHeaders()
     })
-      .then(response => response.ok ? response.json() : [])
+      .then(response => {
+        if (!response.ok) {
+          if (response.status === 403 || response.status === 429) coolDownNewestCommentsApi()
+          return []
+        }
+        return response.json()
+      })
       .then(data => {
         data = Array.isArray(data) ? data : []
         const githubArray = data.map(item => {
@@ -360,13 +397,13 @@ document.addEventListener('pjax:send', () => {
             } catch (e) {
               const $dom = document.querySelector('#card-newest-comments .aside-list')
               if ($dom && !$dom.querySelector('.aside-list-item')) {
-                $dom.textContent = '????'
+                $dom.textContent = '暂无评论'
               }
             }
           } else {
             const $dom = document.querySelector('#card-newest-comments .aside-list')
             if ($dom && !$dom.querySelector('.aside-list-item')) {
-              $dom.textContent = '????'
+              $dom.textContent = '暂无评论'
             }
           }
           return
@@ -380,7 +417,7 @@ document.addEventListener('pjax:send', () => {
         }
         const $dom = document.querySelector('#card-newest-comments .aside-list')
         if ($dom && !$dom.querySelector('.aside-list-item')) {
-          $dom.textContent = '????'
+          $dom.textContent = '暂无评论'
         }
       })
   }
