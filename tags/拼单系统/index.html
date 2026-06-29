@@ -1,1 +1,526 @@
-<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>拼单系统 | Jeffrey</title><meta name="author" content="符政辉"><meta name="description" content="技术博客、独立开发者、Java开发、AI开发"><link rel="shortcut icon" href="/img/logo.png"><link rel="stylesheet" href="/css/index.css?v=4.13.0"><link rel="stylesheet" href="/css/modify.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><meta name="generator" content="Hexo 7.3.0"></head><body><div id="web_bg"></div><div class="page" id="body-wrap"><header class="not-home-page fixed" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="Jeffrey"><img class="site-icon" src="/img/logo.png"><span class="site-name">Jeffrey</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 留言板</span></a></div></div></div></nav><div id="page-site-info"><h1 id="site-title">拼单系统</h1></div></header><main class="layout" id="content-inner"><div id="archive"><div class="article-sort-title">标签 - 拼单系统</div><div class="article-sort"><div class="article-sort-item year">2026</div><div class="article-sort-item"><a class="article-sort-item-img" href="/2026/06/30/%E4%B8%8B%E5%8D%88%E8%8C%B6%E6%8B%BC%E5%8D%95%E7%B3%BB%E7%BB%9F%E2%80%947.%20RabbitMQ%E5%9B%9E%E8%B0%83%E3%80%81%E9%80%80%E5%8D%95%E8%A1%A5%E5%81%BF%E4%B8%8E%E9%83%A8%E7%BD%B2%E5%A4%8D%E7%9B%98/" title="下午茶拼单系统—7. RabbitMQ回调、退单补偿与部署复盘"><img src="/img/拼单系统.png" alt="下午茶拼单系统—7. RabbitMQ回调、退单补偿与部署复盘" onerror="this.onerror=null;this.src='/img/404.jpg'"></a><div class="article-sort-item-info"><div class="article-sort-item-time"><i class="far fa-calendar-alt"></i><time class="post-meta-date-created" datetime="2026-06-30T13:01:24.000Z" title="发表于 2026-06-30 21:01:24">2026-06-30</time></div><a class="article-sort-item-title" href="/2026/06/30/%E4%B8%8B%E5%8D%88%E8%8C%B6%E6%8B%BC%E5%8D%95%E7%B3%BB%E7%BB%9F%E2%80%947.%20RabbitMQ%E5%9B%9E%E8%B0%83%E3%80%81%E9%80%80%E5%8D%95%E8%A1%A5%E5%81%BF%E4%B8%8E%E9%83%A8%E7%BD%B2%E5%A4%8D%E7%9B%98/" title="下午茶拼单系统—7. RabbitMQ回调、退单补偿与部署复盘">下午茶拼单系统—7. RabbitMQ回调、退单补偿与部署复盘</a></div></div><div class="article-sort-item"><a class="article-sort-item-img" href="/2026/06/26/%E4%B8%8B%E5%8D%88%E8%8C%B6%E6%8B%BC%E5%8D%95%E7%B3%BB%E7%BB%9F%E2%80%946.%20%E4%BA%A4%E6%98%93%E9%94%81%E5%8D%95%E3%80%81%E6%94%AF%E4%BB%98%E5%AE%9D%E6%94%AF%E4%BB%98%E4%B8%8E%E6%9C%80%E7%BB%88%E4%B8%80%E8%87%B4%E6%80%A7/" title="下午茶拼单系统—6. 交易锁单、支付宝支付与最终一致性"><img src="/img/拼单系统.png" alt="下午茶拼单系统—6. 交易锁单、支付宝支付与最终一致性" onerror="this.onerror=null;this.src='/img/404.jpg'"></a><div class="article-sort-item-info"><div class="article-sort-item-time"><i class="far fa-calendar-alt"></i><time class="post-meta-date-created" datetime="2026-06-26T13:01:24.000Z" title="发表于 2026-06-26 21:01:24">2026-06-26</time></div><a class="article-sort-item-title" href="/2026/06/26/%E4%B8%8B%E5%8D%88%E8%8C%B6%E6%8B%BC%E5%8D%95%E7%B3%BB%E7%BB%9F%E2%80%946.%20%E4%BA%A4%E6%98%93%E9%94%81%E5%8D%95%E3%80%81%E6%94%AF%E4%BB%98%E5%AE%9D%E6%94%AF%E4%BB%98%E4%B8%8E%E6%9C%80%E7%BB%88%E4%B8%80%E8%87%B4%E6%80%A7/" title="下午茶拼单系统—6. 交易锁单、支付宝支付与最终一致性">下午茶拼单系统—6. 交易锁单、支付宝支付与最终一致性</a></div></div><div class="article-sort-item"><a class="article-sort-item-img" href="/2026/06/22/%E4%B8%8B%E5%8D%88%E8%8C%B6%E6%8B%BC%E5%8D%95%E7%B3%BB%E7%BB%9F%E2%80%945.%20DCC%E5%8A%A8%E6%80%81%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83%EF%BC%9A%E7%A7%92%E7%BA%A7%E8%B0%83%E6%95%B4%E4%B8%9A%E5%8A%A1%E5%AD%97%E6%AE%B5/" title="下午茶拼单系统—5. DCC动态配置中心：秒级调整业务字段"><img src="/img/拼单系统.png" alt="下午茶拼单系统—5. DCC动态配置中心：秒级调整业务字段" onerror="this.onerror=null;this.src='/img/404.jpg'"></a><div class="article-sort-item-info"><div class="article-sort-item-time"><i class="far fa-calendar-alt"></i><time class="post-meta-date-created" datetime="2026-06-22T13:01:24.000Z" title="发表于 2026-06-22 21:01:24">2026-06-22</time></div><a class="article-sort-item-title" href="/2026/06/22/%E4%B8%8B%E5%8D%88%E8%8C%B6%E6%8B%BC%E5%8D%95%E7%B3%BB%E7%BB%9F%E2%80%945.%20DCC%E5%8A%A8%E6%80%81%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83%EF%BC%9A%E7%A7%92%E7%BA%A7%E8%B0%83%E6%95%B4%E4%B8%9A%E5%8A%A1%E5%AD%97%E6%AE%B5/" title="下午茶拼单系统—5. DCC动态配置中心：秒级调整业务字段">下午茶拼单系统—5. DCC动态配置中心：秒级调整业务字段</a></div></div><div class="article-sort-item"><a class="article-sort-item-img" href="/2026/06/18/%E4%B8%8B%E5%8D%88%E8%8C%B6%E6%8B%BC%E5%8D%95%E7%B3%BB%E7%BB%9F%E2%80%944.%20Redis%20BitMap%E4%BA%BA%E7%BE%A4%E6%A0%87%E7%AD%BE%E4%B8%8E%E5%BA%93%E5%AD%98%E5%8F%AF%E8%A7%81%E6%80%A7/" title="下午茶拼单系统—4. Redis BitMap人群标签与库存可见性"><img src="/img/拼单系统.png" alt="下午茶拼单系统—4. Redis BitMap人群标签与库存可见性" onerror="this.onerror=null;this.src='/img/404.jpg'"></a><div class="article-sort-item-info"><div class="article-sort-item-time"><i class="far fa-calendar-alt"></i><time class="post-meta-date-created" datetime="2026-06-18T13:01:24.000Z" title="发表于 2026-06-18 21:01:24">2026-06-18</time></div><a class="article-sort-item-title" href="/2026/06/18/%E4%B8%8B%E5%8D%88%E8%8C%B6%E6%8B%BC%E5%8D%95%E7%B3%BB%E7%BB%9F%E2%80%944.%20Redis%20BitMap%E4%BA%BA%E7%BE%A4%E6%A0%87%E7%AD%BE%E4%B8%8E%E5%BA%93%E5%AD%98%E5%8F%AF%E8%A7%81%E6%80%A7/" title="下午茶拼单系统—4. Redis BitMap人群标签与库存可见性">下午茶拼单系统—4. Redis BitMap人群标签与库存可见性</a></div></div><div class="article-sort-item"><a class="article-sort-item-img" href="/2026/06/14/%E4%B8%8B%E5%8D%88%E8%8C%B6%E6%8B%BC%E5%8D%95%E7%B3%BB%E7%BB%9F%E2%80%943.%20FutureTask%E4%B8%8E%E7%BA%BF%E7%A8%8B%E6%B1%A0%EF%BC%9A%E9%99%8D%E4%BD%8E%E8%AF%95%E7%AE%97%E6%8E%A5%E5%8F%A3%E7%AD%89%E5%BE%85%E6%97%B6%E9%97%B4/" title="下午茶拼单系统—3. FutureTask与线程池：降低试算接口等待时间"><img src="/img/拼单系统.png" alt="下午茶拼单系统—3. FutureTask与线程池：降低试算接口等待时间" onerror="this.onerror=null;this.src='/img/404.jpg'"></a><div class="article-sort-item-info"><div class="article-sort-item-time"><i class="far fa-calendar-alt"></i><time class="post-meta-date-created" datetime="2026-06-14T13:01:24.000Z" title="发表于 2026-06-14 21:01:24">2026-06-14</time></div><a class="article-sort-item-title" href="/2026/06/14/%E4%B8%8B%E5%8D%88%E8%8C%B6%E6%8B%BC%E5%8D%95%E7%B3%BB%E7%BB%9F%E2%80%943.%20FutureTask%E4%B8%8E%E7%BA%BF%E7%A8%8B%E6%B1%A0%EF%BC%9A%E9%99%8D%E4%BD%8E%E8%AF%95%E7%AE%97%E6%8E%A5%E5%8F%A3%E7%AD%89%E5%BE%85%E6%97%B6%E9%97%B4/" title="下午茶拼单系统—3. FutureTask与线程池：降低试算接口等待时间">下午茶拼单系统—3. FutureTask与线程池：降低试算接口等待时间</a></div></div><div class="article-sort-item"><a class="article-sort-item-img" href="/2026/06/10/%E4%B8%8B%E5%8D%88%E8%8C%B6%E6%8B%BC%E5%8D%95%E7%B3%BB%E7%BB%9F%E2%80%942.%20%E4%BC%98%E6%83%A0%E8%AE%A1%E7%AE%97%EF%BC%9A%E6%BB%A1%E5%87%8F%E3%80%81%E6%8A%98%E6%89%A3%E3%80%81N%E5%85%83%E8%B4%AD%E4%B8%8E%E7%9B%B4%E5%87%8F/" title="下午茶拼单系统—2. 优惠计算：满减、折扣、N元购与直减"><img src="/img/拼单系统.png" alt="下午茶拼单系统—2. 优惠计算：满减、折扣、N元购与直减" onerror="this.onerror=null;this.src='/img/404.jpg'"></a><div class="article-sort-item-info"><div class="article-sort-item-time"><i class="far fa-calendar-alt"></i><time class="post-meta-date-created" datetime="2026-06-10T13:01:24.000Z" title="发表于 2026-06-10 21:01:24">2026-06-10</time></div><a class="article-sort-item-title" href="/2026/06/10/%E4%B8%8B%E5%8D%88%E8%8C%B6%E6%8B%BC%E5%8D%95%E7%B3%BB%E7%BB%9F%E2%80%942.%20%E4%BC%98%E6%83%A0%E8%AE%A1%E7%AE%97%EF%BC%9A%E6%BB%A1%E5%87%8F%E3%80%81%E6%8A%98%E6%89%A3%E3%80%81N%E5%85%83%E8%B4%AD%E4%B8%8E%E7%9B%B4%E5%87%8F/" title="下午茶拼单系统—2. 优惠计算：满减、折扣、N元购与直减">下午茶拼单系统—2. 优惠计算：满减、折扣、N元购与直减</a></div></div><div class="article-sort-item"><a class="article-sort-item-img" href="/2026/06/06/%E4%B8%8B%E5%8D%88%E8%8C%B6%E6%8B%BC%E5%8D%95%E7%B3%BB%E7%BB%9F%E2%80%941.%20%E8%A7%84%E5%88%99%E6%A0%91%E9%A9%B1%E5%8A%A8%E7%9A%84%E8%AF%95%E7%AE%97%E9%93%BE%E8%B7%AF/" title="下午茶拼单系统—1. 规则树驱动的试算链路"><img src="/img/拼单系统.png" alt="下午茶拼单系统—1. 规则树驱动的试算链路" onerror="this.onerror=null;this.src='/img/404.jpg'"></a><div class="article-sort-item-info"><div class="article-sort-item-time"><i class="far fa-calendar-alt"></i><time class="post-meta-date-created" datetime="2026-06-06T13:01:24.000Z" title="发表于 2026-06-06 21:01:24">2026-06-06</time></div><a class="article-sort-item-title" href="/2026/06/06/%E4%B8%8B%E5%8D%88%E8%8C%B6%E6%8B%BC%E5%8D%95%E7%B3%BB%E7%BB%9F%E2%80%941.%20%E8%A7%84%E5%88%99%E6%A0%91%E9%A9%B1%E5%8A%A8%E7%9A%84%E8%AF%95%E7%AE%97%E9%93%BE%E8%B7%AF/" title="下午茶拼单系统—1. 规则树驱动的试算链路">下午茶拼单系统—1. 规则树驱动的试算链路</a></div></div><div class="article-sort-item"><a class="article-sort-item-img" href="/2026/06/02/%E4%B8%8B%E5%8D%88%E8%8C%B6%E6%8B%BC%E5%8D%95%E7%B3%BB%E7%BB%9F%E2%80%940.%20%E4%BB%8E%E9%9C%80%E6%B1%82%E5%9C%BA%E6%99%AF%E5%88%B0DDD%E5%88%86%E5%B1%82/" title="下午茶拼单系统—0. 从需求场景到DDD分层"><img src="/img/拼单系统.png" alt="下午茶拼单系统—0. 从需求场景到DDD分层" onerror="this.onerror=null;this.src='/img/404.jpg'"></a><div class="article-sort-item-info"><div class="article-sort-item-time"><i class="far fa-calendar-alt"></i><time class="post-meta-date-created" datetime="2026-06-02T13:01:24.000Z" title="发表于 2026-06-02 21:01:24">2026-06-02</time></div><a class="article-sort-item-title" href="/2026/06/02/%E4%B8%8B%E5%8D%88%E8%8C%B6%E6%8B%BC%E5%8D%95%E7%B3%BB%E7%BB%9F%E2%80%940.%20%E4%BB%8E%E9%9C%80%E6%B1%82%E5%9C%BA%E6%99%AF%E5%88%B0DDD%E5%88%86%E5%B1%82/" title="下午茶拼单系统—0. 从需求场景到DDD分层">下午茶拼单系统—0. 从需求场景到DDD分层</a></div></div></div></div></main><footer id="footer" style="background: transparent"><div id="footer-wrap"><div class="copyright">©2020 - 2026 By 符政辉</div><div class="footer_custom_text">Copyright© Jeffrey开发 独立开发者的日常总结<br></div></div></footer></div><script src="/js/utils.js?v=4.13.0"></script><script src="/js/main.js?v=4.13.0"></script></body></html>
+<!DOCTYPE html>
+
+<html data-theme="light" lang="zh-CN"><head><meta charset="utf-8"/><meta content="IE=edge" http-equiv="X-UA-Compatible"/><meta content="width=device-width, initial-scale=1.0,viewport-fit=cover" name="viewport"/><title>拼单系统 | Jeffrey</title><meta content="符政辉" name="author"/><meta content="符政辉" name="copyright"/><meta content="telephone=no" name="format-detection"/><meta content="#ffffff" name="theme-color"/><meta content="技术博客、独立开发者、Java开发、Go开发、人工智能" name="description"/>
+<meta content="website" property="og:type"/>
+<meta content="AI开发" property="og:title"/>
+<meta content="https://aspirant02.github.io/tags/AI%E5%BC%80%E5%8F%91/index.html" property="og:url"/>
+<meta content="Jeffrey" property="og:site_name"/>
+<meta content="技术博客、独立开发者、Java开发、Go开发、人工智能" property="og:description"/>
+<meta content="zh_CN" property="og:locale"/>
+<meta content="https://aspirant02.github.io/img/cyl.jpg" property="og:image"/>
+<meta content="符政辉" property="article:author"/>
+<meta content="技术博客、独立开发者、Java开发、Go开发、人工智能" property="article:tag"/>
+<meta content="summary" name="twitter:card"/>
+<meta content="https://aspirant02.github.io/img/cyl.jpg" name="twitter:image"/><link href="/img/logo.png" rel="shortcut icon"/><link href="https://aspirant02.github.io/tags/AI%E5%BC%80%E5%8F%91/index.html" rel="canonical"/><link href="//cdn.jsdelivr.net" rel="preconnect"/><link href="//hm.baidu.com" rel="preconnect"/><link href="//busuanzi.ibruce.info" rel="preconnect"/><link href="/css/index.css?v=4.13.0" rel="stylesheet"/><link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css" rel="stylesheet"/><link href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'" rel="stylesheet"/><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?ae9ce48d24501920dfa510977fa6cdad";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'mediumZoom',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.1/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'AI开发',
+  isPost: false,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2026-08-03 00:15:19'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link href="/css/modify.css" rel="stylesheet"/><meta content="Hexo 7.3.0" name="generator"/><link href="/atom.xml" rel="alternate" title="Jeffrey" type="application/atom+xml"/>
+</head><body><script>window.paceOptions = {
+  restartOnPushState: false
+}
+
+document.addEventListener('pjax:send', () => {
+  Pace.restart()
+})
+</script><link href="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/themes/blue/pace-theme-minimal.min.css" rel="stylesheet"/><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img alt="avatar" onerror="onerror=null;src='/img/friend_404.gif'" src="/img/cyl.jpg"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">21</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">7</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 留言板</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="not-home-page fixed" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="Jeffrey"><img class="site-icon" src="/img/logo.png"/><span class="site-name">Jeffrey</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 留言板</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="page-site-info"><h1 id="site-title">拼单系统</h1></div></header><main class="layout hide-aside" id="content-inner"><div id="tag"><div class="article-sort-title">标签 - 拼单系统</div><div class="article-sort"><div class="article-sort-item year">2026</div><div class="article-sort-item">
+<a class="article-sort-item-img" href="/2026/06/30/%E4%B8%8B%E5%8D%88%E8%8C%B6%E6%8B%BC%E5%8D%95%E7%B3%BB%E7%BB%9F%E2%80%947.%20RabbitMQ%E5%9B%9E%E8%B0%83%E3%80%81%E9%80%80%E5%8D%95%E8%A1%A5%E5%81%BF%E4%B8%8E%E9%83%A8%E7%BD%B2%E5%A4%8D%E7%9B%98/" title="下午茶拼单系统—7. RabbitMQ回调、退单补偿与部署复盘"><img alt="下午茶拼单系统—7. RabbitMQ回调、退单补偿与部署复盘" onerror="this.onerror=null;this.src='/img/404.jpg'" src="/img/拼单系统.png"/></a>
+<div class="article-sort-item-info">
+<div class="article-sort-item-time"><i class="far fa-calendar-alt"></i><time class="post-meta-date-created" datetime="2026-06-30T13:01:24Z" title="发表于 2026-06-30 21:01:24">2026-06-30</time></div>
+<a class="article-sort-item-title" href="/2026/06/30/%E4%B8%8B%E5%8D%88%E8%8C%B6%E6%8B%BC%E5%8D%95%E7%B3%BB%E7%BB%9F%E2%80%947.%20RabbitMQ%E5%9B%9E%E8%B0%83%E3%80%81%E9%80%80%E5%8D%95%E8%A1%A5%E5%81%BF%E4%B8%8E%E9%83%A8%E7%BD%B2%E5%A4%8D%E7%9B%98/" title="下午茶拼单系统—7. RabbitMQ回调、退单补偿与部署复盘">下午茶拼单系统—7. RabbitMQ回调、退单补偿与部署复盘</a>
+</div>
+</div><div class="article-sort-item">
+<a class="article-sort-item-img" href="/2026/06/26/%E4%B8%8B%E5%8D%88%E8%8C%B6%E6%8B%BC%E5%8D%95%E7%B3%BB%E7%BB%9F%E2%80%946.%20%E4%BA%A4%E6%98%93%E9%94%81%E5%8D%95%E3%80%81%E6%94%AF%E4%BB%98%E5%AE%9D%E6%94%AF%E4%BB%98%E4%B8%8E%E6%9C%80%E7%BB%88%E4%B8%80%E8%87%B4%E6%80%A7/" title="下午茶拼单系统—6. 交易锁单、支付宝支付与最终一致性"><img alt="下午茶拼单系统—6. 交易锁单、支付宝支付与最终一致性" onerror="this.onerror=null;this.src='/img/404.jpg'" src="/img/拼单系统.png"/></a>
+<div class="article-sort-item-info">
+<div class="article-sort-item-time"><i class="far fa-calendar-alt"></i><time class="post-meta-date-created" datetime="2026-06-26T13:01:24Z" title="发表于 2026-06-26 21:01:24">2026-06-26</time></div>
+<a class="article-sort-item-title" href="/2026/06/26/%E4%B8%8B%E5%8D%88%E8%8C%B6%E6%8B%BC%E5%8D%95%E7%B3%BB%E7%BB%9F%E2%80%946.%20%E4%BA%A4%E6%98%93%E9%94%81%E5%8D%95%E3%80%81%E6%94%AF%E4%BB%98%E5%AE%9D%E6%94%AF%E4%BB%98%E4%B8%8E%E6%9C%80%E7%BB%88%E4%B8%80%E8%87%B4%E6%80%A7/" title="下午茶拼单系统—6. 交易锁单、支付宝支付与最终一致性">下午茶拼单系统—6. 交易锁单、支付宝支付与最终一致性</a>
+</div>
+</div><div class="article-sort-item">
+<a class="article-sort-item-img" href="/2026/06/22/%E4%B8%8B%E5%8D%88%E8%8C%B6%E6%8B%BC%E5%8D%95%E7%B3%BB%E7%BB%9F%E2%80%945.%20DCC%E5%8A%A8%E6%80%81%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83%EF%BC%9A%E7%A7%92%E7%BA%A7%E8%B0%83%E6%95%B4%E4%B8%9A%E5%8A%A1%E5%AD%97%E6%AE%B5/" title="下午茶拼单系统—5. DCC动态配置中心：秒级调整业务字段"><img alt="下午茶拼单系统—5. DCC动态配置中心：秒级调整业务字段" onerror="this.onerror=null;this.src='/img/404.jpg'" src="/img/拼单系统.png"/></a>
+<div class="article-sort-item-info">
+<div class="article-sort-item-time"><i class="far fa-calendar-alt"></i><time class="post-meta-date-created" datetime="2026-06-22T13:01:24Z" title="发表于 2026-06-22 21:01:24">2026-06-22</time></div>
+<a class="article-sort-item-title" href="/2026/06/22/%E4%B8%8B%E5%8D%88%E8%8C%B6%E6%8B%BC%E5%8D%95%E7%B3%BB%E7%BB%9F%E2%80%945.%20DCC%E5%8A%A8%E6%80%81%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83%EF%BC%9A%E7%A7%92%E7%BA%A7%E8%B0%83%E6%95%B4%E4%B8%9A%E5%8A%A1%E5%AD%97%E6%AE%B5/" title="下午茶拼单系统—5. DCC动态配置中心：秒级调整业务字段">下午茶拼单系统—5. DCC动态配置中心：秒级调整业务字段</a>
+</div>
+</div><div class="article-sort-item">
+<a class="article-sort-item-img" href="/2026/06/18/%E4%B8%8B%E5%8D%88%E8%8C%B6%E6%8B%BC%E5%8D%95%E7%B3%BB%E7%BB%9F%E2%80%944.%20Redis%20BitMap%E4%BA%BA%E7%BE%A4%E6%A0%87%E7%AD%BE%E4%B8%8E%E5%BA%93%E5%AD%98%E5%8F%AF%E8%A7%81%E6%80%A7/" title="下午茶拼单系统—4. Redis BitMap人群标签与库存可见性"><img alt="下午茶拼单系统—4. Redis BitMap人群标签与库存可见性" onerror="this.onerror=null;this.src='/img/404.jpg'" src="/img/拼单系统.png"/></a>
+<div class="article-sort-item-info">
+<div class="article-sort-item-time"><i class="far fa-calendar-alt"></i><time class="post-meta-date-created" datetime="2026-06-18T13:01:24Z" title="发表于 2026-06-18 21:01:24">2026-06-18</time></div>
+<a class="article-sort-item-title" href="/2026/06/18/%E4%B8%8B%E5%8D%88%E8%8C%B6%E6%8B%BC%E5%8D%95%E7%B3%BB%E7%BB%9F%E2%80%944.%20Redis%20BitMap%E4%BA%BA%E7%BE%A4%E6%A0%87%E7%AD%BE%E4%B8%8E%E5%BA%93%E5%AD%98%E5%8F%AF%E8%A7%81%E6%80%A7/" title="下午茶拼单系统—4. Redis BitMap人群标签与库存可见性">下午茶拼单系统—4. Redis BitMap人群标签与库存可见性</a>
+</div>
+</div><div class="article-sort-item">
+<a class="article-sort-item-img" href="/2026/06/14/%E4%B8%8B%E5%8D%88%E8%8C%B6%E6%8B%BC%E5%8D%95%E7%B3%BB%E7%BB%9F%E2%80%943.%20FutureTask%E4%B8%8E%E7%BA%BF%E7%A8%8B%E6%B1%A0%EF%BC%9A%E9%99%8D%E4%BD%8E%E8%AF%95%E7%AE%97%E6%8E%A5%E5%8F%A3%E7%AD%89%E5%BE%85%E6%97%B6%E9%97%B4/" title="下午茶拼单系统—3. FutureTask与线程池：降低试算接口等待时间"><img alt="下午茶拼单系统—3. FutureTask与线程池：降低试算接口等待时间" onerror="this.onerror=null;this.src='/img/404.jpg'" src="/img/拼单系统.png"/></a>
+<div class="article-sort-item-info">
+<div class="article-sort-item-time"><i class="far fa-calendar-alt"></i><time class="post-meta-date-created" datetime="2026-06-14T13:01:24Z" title="发表于 2026-06-14 21:01:24">2026-06-14</time></div>
+<a class="article-sort-item-title" href="/2026/06/14/%E4%B8%8B%E5%8D%88%E8%8C%B6%E6%8B%BC%E5%8D%95%E7%B3%BB%E7%BB%9F%E2%80%943.%20FutureTask%E4%B8%8E%E7%BA%BF%E7%A8%8B%E6%B1%A0%EF%BC%9A%E9%99%8D%E4%BD%8E%E8%AF%95%E7%AE%97%E6%8E%A5%E5%8F%A3%E7%AD%89%E5%BE%85%E6%97%B6%E9%97%B4/" title="下午茶拼单系统—3. FutureTask与线程池：降低试算接口等待时间">下午茶拼单系统—3. FutureTask与线程池：降低试算接口等待时间</a>
+</div>
+</div><div class="article-sort-item">
+<a class="article-sort-item-img" href="/2026/06/10/%E4%B8%8B%E5%8D%88%E8%8C%B6%E6%8B%BC%E5%8D%95%E7%B3%BB%E7%BB%9F%E2%80%942.%20%E4%BC%98%E6%83%A0%E8%AE%A1%E7%AE%97%EF%BC%9A%E6%BB%A1%E5%87%8F%E3%80%81%E6%8A%98%E6%89%A3%E3%80%81N%E5%85%83%E8%B4%AD%E4%B8%8E%E7%9B%B4%E5%87%8F/" title="下午茶拼单系统—2. 优惠计算：满减、折扣、N元购与直减"><img alt="下午茶拼单系统—2. 优惠计算：满减、折扣、N元购与直减" onerror="this.onerror=null;this.src='/img/404.jpg'" src="/img/拼单系统.png"/></a>
+<div class="article-sort-item-info">
+<div class="article-sort-item-time"><i class="far fa-calendar-alt"></i><time class="post-meta-date-created" datetime="2026-06-10T13:01:24Z" title="发表于 2026-06-10 21:01:24">2026-06-10</time></div>
+<a class="article-sort-item-title" href="/2026/06/10/%E4%B8%8B%E5%8D%88%E8%8C%B6%E6%8B%BC%E5%8D%95%E7%B3%BB%E7%BB%9F%E2%80%942.%20%E4%BC%98%E6%83%A0%E8%AE%A1%E7%AE%97%EF%BC%9A%E6%BB%A1%E5%87%8F%E3%80%81%E6%8A%98%E6%89%A3%E3%80%81N%E5%85%83%E8%B4%AD%E4%B8%8E%E7%9B%B4%E5%87%8F/" title="下午茶拼单系统—2. 优惠计算：满减、折扣、N元购与直减">下午茶拼单系统—2. 优惠计算：满减、折扣、N元购与直减</a>
+</div>
+</div><div class="article-sort-item">
+<a class="article-sort-item-img" href="/2026/06/06/%E4%B8%8B%E5%8D%88%E8%8C%B6%E6%8B%BC%E5%8D%95%E7%B3%BB%E7%BB%9F%E2%80%941.%20%E8%A7%84%E5%88%99%E6%A0%91%E9%A9%B1%E5%8A%A8%E7%9A%84%E8%AF%95%E7%AE%97%E9%93%BE%E8%B7%AF/" title="下午茶拼单系统—1. 规则树驱动的试算链路"><img alt="下午茶拼单系统—1. 规则树驱动的试算链路" onerror="this.onerror=null;this.src='/img/404.jpg'" src="/img/拼单系统.png"/></a>
+<div class="article-sort-item-info">
+<div class="article-sort-item-time"><i class="far fa-calendar-alt"></i><time class="post-meta-date-created" datetime="2026-06-06T13:01:24Z" title="发表于 2026-06-06 21:01:24">2026-06-06</time></div>
+<a class="article-sort-item-title" href="/2026/06/06/%E4%B8%8B%E5%8D%88%E8%8C%B6%E6%8B%BC%E5%8D%95%E7%B3%BB%E7%BB%9F%E2%80%941.%20%E8%A7%84%E5%88%99%E6%A0%91%E9%A9%B1%E5%8A%A8%E7%9A%84%E8%AF%95%E7%AE%97%E9%93%BE%E8%B7%AF/" title="下午茶拼单系统—1. 规则树驱动的试算链路">下午茶拼单系统—1. 规则树驱动的试算链路</a>
+</div>
+</div><div class="article-sort-item">
+<a class="article-sort-item-img" href="/2026/06/02/%E4%B8%8B%E5%8D%88%E8%8C%B6%E6%8B%BC%E5%8D%95%E7%B3%BB%E7%BB%9F%E2%80%940.%20%E4%BB%8E%E9%9C%80%E6%B1%82%E5%9C%BA%E6%99%AF%E5%88%B0DDD%E5%88%86%E5%B1%82/" title="下午茶拼单系统—0. 从需求场景到DDD分层"><img alt="下午茶拼单系统—0. 从需求场景到DDD分层" onerror="this.onerror=null;this.src='/img/404.jpg'" src="/img/拼单系统.png"/></a>
+<div class="article-sort-item-info">
+<div class="article-sort-item-time"><i class="far fa-calendar-alt"></i><time class="post-meta-date-created" datetime="2026-06-02T13:01:24Z" title="发表于 2026-06-02 21:01:24">2026-06-02</time></div>
+<a class="article-sort-item-title" href="/2026/06/02/%E4%B8%8B%E5%8D%88%E8%8C%B6%E6%8B%BC%E5%8D%95%E7%B3%BB%E7%BB%9F%E2%80%940.%20%E4%BB%8E%E9%9C%80%E6%B1%82%E5%9C%BA%E6%99%AF%E5%88%B0DDD%E5%88%86%E5%B1%82/" title="下午茶拼单系统—0. 从需求场景到DDD分层">下午茶拼单系统—0. 从需求场景到DDD分层</a>
+</div>
+</div></div></div></main><footer id="footer" style="background: transparent"><div id="footer-wrap"><div class="copyright">©2020 - 2026 By 符政辉</div><div class="footer_custom_text">Copyright© Jeffrey开发-独立开发者的日常总结<br/></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" title="浅色和深色模式转换" type="button"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" title="单栏和双栏切换" type="button"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" title="设置" type="button"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" title="回到顶部" type="button"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.13.0"></script><script src="/js/main.js?v=4.13.0"></script><script src="https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist/medium-zoom.min.js"></script><div class="js-pjax"></div><script>window.addEventListener('load', () => {
+  const changeContent = (content) => {
+    if (content === '') return content
+
+    content = content.replace(/<img.*?src="(.*?)"?[^\>]+>/ig, '[图片]') // replace image link
+    content = content.replace(/<a[^>]+?href=["']?([^"']+)["']?[^>]*>([^<]+)<\/a>/gi, '[链接]') // replace url
+    content = content.replace(/<pre><code>.*?<\/pre>/gi, '[代码]') // replace code
+    content = content.replace(/<[^>]+>/g,"") // remove html tag
+
+    if (content.length > 150) {
+      content = content.substring(0,150) + '...'
+    }
+    return content
+  }
+
+  const getGithubHeaders = () => {
+    const headers = {
+      Accept: 'application/vnd.github.v3.html+json'
+    }
+    const accessToken = window.localStorage.getItem('GT_ACCESS_TOKEN')
+    if (accessToken) {
+      headers.Authorization = `token ${accessToken}`
+    }
+    return headers
+  }
+
+  const getLatestGitalkComment = () => {
+    const $comments = document.querySelector('#gitalk-container .gt-comments') || document.querySelector('#gitalk-container')
+    const $comment = $comments && $comments.querySelector('.gt-comment')
+    if (!$comment) return null
+
+    const avatar = $comment.querySelector('.gt-comment-avatar')?.getAttribute('src') || '/img/cyl.jpg'
+    const nick = $comment.querySelector('.gt-comment-username')?.textContent?.trim() || 'Aspirant02'
+    const content = $comment.querySelector('.gt-comment-body')?.innerText?.trim() || $comment.querySelector('.gt-comment-text')?.textContent?.trim() || ''
+    const date = new Date().toISOString()
+    const githubUrl = $comment.querySelector('.gt-comment-username')?.getAttribute('href') || ''
+    return {
+      avatar,
+      content: changeContent(content),
+      nick,
+      url: githubUrl || window.location.href,
+      date,
+      githubUrl
+    }
+  }
+
+  const getLatestGitalkCommentsFromDom = () => {
+    const comments = Array.from(document.querySelectorAll('#gitalk-container .gt-comment'))
+    return comments.reverse().map(comment => {
+      const avatar = comment.querySelector('.gt-comment-avatar')?.getAttribute('src') || '/img/cyl.jpg'
+      const nick = comment.querySelector('.gt-comment-username')?.textContent?.trim() || 'Aspirant02'
+      const content = comment.querySelector('.gt-comment-body')?.innerText?.trim() || comment.querySelector('.gt-comment-text')?.textContent?.trim() || ''
+      const githubUrl = comment.querySelector('.gt-comment-username')?.getAttribute('href') || ''
+      const dateText = comment.querySelector('.gt-comment-date')?.textContent?.trim() || ''
+      return {
+        avatar,
+        content: changeContent(content),
+        nick,
+        url: githubUrl || window.location.href,
+        date: dateText && !Number.isNaN(Date.parse(dateText)) ? new Date(dateText).toISOString() : new Date().toISOString(),
+        githubUrl
+      }
+    }).filter(item => item.content)
+  }
+
+  const findTrueUrl = (array) => {
+    if (!Array.isArray(array) || array.length === 0) {
+      return
+    }
+
+    Promise.all(array.map(item =>
+      fetch(item.url, {
+        headers: getGithubHeaders()
+      })
+        .then(resp => {
+          if (!resp.ok) {
+            throw new Error(resp.statusText || 'request failed')
+          }
+          return resp.json()
+        })
+        .then(data => {
+          let urlArray = data.body ? data.body.match(/(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?/ig) : []
+          if (!Array.isArray(urlArray) || urlArray.length === 0) {
+            urlArray = [`${data.html_url || item.url}`]
+          }
+          const trueUrl = data.user && data.user.login === 'utterances-bot'
+            ? urlArray.pop()
+            : urlArray.shift()
+          return trueUrl || item.url
+        })
+        .catch(() => item.url)
+    )).then(res => {
+        array = array.map((i,index)=> {
+          return {
+            ...i,
+            url: res[index] || i.url
+          }
+        })
+
+        saveToLocal.set('github-newest-comments-v2', JSON.stringify(array), 7)
+        generateHtml(array)
+    }).catch(() => {
+        generateHtml(array)
+    })
+  }
+
+  const getComment = () => {
+    fetch('https://api.github.com/repos/Aspirant02/Aspirant02.github.io/issues/comments?sort=updated&direction=desc&per_page=6&page=1', {
+      headers: getGithubHeaders()
+    })
+      .then(response => response.ok ? response.json() : [])
+      .then(data => {
+        data = Array.isArray(data) ? data : []
+        const githubArray = data.map(item => {
+          return {
+            'avatar': item.user.avatar_url,
+            'content': changeContent(item.body_html || item.body),
+            'nick': item.user.login,
+            'url': item.issue_url,
+            'date': item.updated_at,
+            'githubUrl': item.html_url
+          }
+        })
+        if (githubArray.length === 0) {
+          const localPreview = getLatestGitalkCommentsFromDom()
+          if (localPreview.length > 0) {
+            generateHtml(localPreview)
+            return
+          }
+          const cached = saveToLocal.get('github-newest-comments-v2')
+          if (cached) {
+            try {
+              generateHtml(JSON.parse(cached))
+            } catch (e) {
+              const $dom = document.querySelector('#card-newest-comments .aside-list')
+              if ($dom && !$dom.querySelector('.aside-list-item')) {
+                $dom.textContent = '????'
+              }
+            }
+          } else {
+            const $dom = document.querySelector('#card-newest-comments .aside-list')
+            if ($dom && !$dom.querySelector('.aside-list-item')) {
+              $dom.textContent = '????'
+            }
+          }
+          return
+        }
+        findTrueUrl(githubArray)
+      }).catch(() => {
+        const localPreview = getLatestGitalkCommentsFromDom()
+        if (localPreview.length > 0) {
+          generateHtml(localPreview)
+          return
+        }
+        const $dom = document.querySelector('#card-newest-comments .aside-list')
+        if ($dom && !$dom.querySelector('.aside-list-item')) {
+          $dom.textContent = '????'
+        }
+      })
+  }
+
+  const generateHtml = array => {
+    let result = ''
+
+    if (array.length) {
+      for (let i = 0; i < array.length; i++) {
+        result += '<div class=\'aside-list-item\'>'
+
+        if (true) {
+          const name = 'src'
+          result += `<a href='${array[i].url}' class='thumbnail'><img ${name}='${array[i].avatar}' alt='${array[i].nick}'></a>`
+        }
+
+        result += `<div class='content'>
+        <a class='comment' href='${array[i].url}' title='${array[i].content}'>${array[i].content}</a>
+        <div class='name'><span>${array[i].nick} / </span><time datetime="${array[i].date}">${btf.diffDate(array[i].date, true)}</time></div>
+        </div></div>`
+      }
+    } else {
+      result += '暂无评论'
+    }
+
+    let $dom = document.querySelector('#card-newest-comments .aside-list')
+    $dom && ($dom.innerHTML= result)
+    window.lazyLoadInstance && window.lazyLoadInstance.update()
+    window.pjax && window.pjax.refresh($dom)
+  }
+
+  let gitalkObserverStarted = false
+  let gitalkDomObserver = null
+  let gitalkBodyObserver = null
+  let gitalkObserverTimer = null
+
+  const readCachedNewestComments = () => {
+    const cached = saveToLocal.get('github-newest-comments-v2')
+    if (!cached) return []
+
+    try {
+      const parsed = JSON.parse(cached)
+      return Array.isArray(parsed) ? parsed : []
+    } catch (e) {
+      return []
+    }
+  }
+
+  const saveNewestComments = comments => {
+    if (!Array.isArray(comments) || comments.length === 0) return
+    saveToLocal.set('github-newest-comments-v2', JSON.stringify(comments), 7)
+    saveToLocal.set('github-newest-comments-live-until', String(Date.now() + 10 * 60 * 1000), 1)
+  }
+
+  const hasFreshNewestComments = () => {
+    const liveUntil = Number(saveToLocal.get('github-newest-comments-live-until') || 0)
+    return Date.now() < liveUntil
+  }
+
+  const refreshNewestCommentsSoon = () => {
+    const liveComments = getLatestGitalkCommentsFromDom()
+    if (liveComments.length > 0) {
+      saveNewestComments(liveComments)
+      generateHtml(liveComments)
+      return
+    }
+
+    const cachedComments = readCachedNewestComments()
+    if (cachedComments.length > 0) {
+      generateHtml(cachedComments)
+      if (hasFreshNewestComments()) {
+        return
+      }
+    }
+
+    if (typeof window.refreshNewestComments === "function") {
+      window.refreshNewestComments()
+    }
+  }
+
+  const bindGitalkCommentObserver = () => {
+    if (gitalkDomObserver) return true
+    const gitalkContainer = document.querySelector('#gitalk-container')
+    if (!gitalkContainer) return false
+
+    gitalkDomObserver = new MutationObserver(() => {
+      clearTimeout(gitalkObserverTimer)
+      gitalkObserverTimer = setTimeout(refreshNewestCommentsSoon, 300)
+    })
+
+    gitalkDomObserver.observe(gitalkContainer, { childList: true, subtree: true })
+    return true
+  }
+
+  const startGitalkObserver = () => {
+    if (gitalkObserverStarted && gitalkDomObserver) return
+
+    if (bindGitalkCommentObserver()) {
+      gitalkObserverStarted = true
+      if (gitalkBodyObserver) {
+        gitalkBodyObserver.disconnect()
+        gitalkBodyObserver = null
+      }
+      return
+    }
+
+    if (gitalkBodyObserver) return
+
+    gitalkBodyObserver = new MutationObserver(() => {
+      if (bindGitalkCommentObserver()) {
+        gitalkObserverStarted = true
+        gitalkBodyObserver.disconnect()
+        gitalkBodyObserver = null
+      }
+    })
+
+    gitalkBodyObserver.observe(document.body, { childList: true, subtree: true })
+  }
+
+  const newestCommentInit = () => {
+    if (document.querySelector('#card-newest-comments .aside-list')) {
+      startGitalkObserver()
+      const forceRefreshUntil = Number(window.__gitalkCommentRefreshUntil || 0)
+      const shouldForceRefresh = Date.now() < forceRefreshUntil
+      const liveComments = getLatestGitalkCommentsFromDom()
+      if (liveComments.length > 0) {
+        saveNewestComments(liveComments)
+        generateHtml(liveComments)
+        return
+      }
+      const cachedComments = readCachedNewestComments()
+      if (cachedComments.length > 0) {
+        generateHtml(cachedComments)
+        if (hasFreshNewestComments() && !shouldForceRefresh) {
+          return
+        }
+      }
+      getComment()
+    }
+  }
+
+  window.refreshNewestComments = newestCommentInit
+  startGitalkObserver()
+  newestCommentInit()
+  document.addEventListener('pjax:complete', newestCommentInit)
+  window.addEventListener('storage', event => {
+    if (event.key === 'github-newest-comments-v2' || event.key === 'github-newest-comments-live-until') {
+      newestCommentInit()
+    }
+  })
+})</script><script defer="defer" id="fluttering_ribbon" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/dist/canvas-fluttering-ribbon.min.js"></script><script async="async" id="click-heart" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/dist/click-heart.min.js"></script><script async="" data-pjax="" src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js?v=4.13.0"></script></div></div></body></html>
